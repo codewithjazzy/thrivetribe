@@ -4,6 +4,6 @@ const quizController = require("../controllers/quiz");
 
 // Quiz Routes
 router.get("/", quizController.getQuiz);
-router.post("/", quizController.handleQuizStep); 
+router.post("/handleQuizStep", quizController.handleQuizStep); 
 
 module.exports = router;

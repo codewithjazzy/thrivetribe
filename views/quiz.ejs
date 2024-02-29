@@ -3,53 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Therapy Type Quiz</title>
 </head>
 <body>
-    <header class="">
-        <nav class="">
-            <div>
-                <img src="logo.png" alt="ThriveTribe Logo" class="">
-            </div>
-            <div class="">
-                <a href="#" class="">about</a>
-                <a href="#" class="">quiz</a>
-                <a href="#" class="">types</a>
-                <a href="#" class="">find</a>
-                <a href="#" class="">1-0-1</a>
-                <a href="#" class="">blog</a>
-                <a href="#" class="">therapist sign in</a>
-            </div>
-        </nav>
-    </header>
-    <main class="">
-        <div class="">
-            <h1>What's your therapy type?</h1>
-            <p>Take our quiz to find out!</p>
-        </div>
-
-        <div id="quiz-container" class="">
-            <% if (sessionData.currentStep === "start") { %>
-                <p><%= sessionData.message %></p>
-                <form action="/quiz" method="POST">
-                    <button type="submit" id="start-quiz-btn">Start Quiz</button>
-                </form>
+    <main>
+        <h1>What's your therapy type?</h1>
+        <div id="quiz-container">
+            <% if (sessionData.currentStep !== "end") { %>
+                <!-- Display the question for the current step -->
+                <p><%= sessionData.question %></p>
+                
+                <!-- Display the answers for the current step -->
+                <% if (sessionData.answers && sessionData.answers.length > 0) { %>
+                    <% sessionData.answers.forEach(function(answer) { %>
+                        <form action="/quiz/handleQuizStep" method="POST">
+                            <button type="submit" name="userInput" value="<%= answer.text %>"><%= answer.text %></button>
+                        </form>
+                    <% }); %>
+                <% } else { %>
+                    <p>Click the button to start the quiz.</p>
+                    <form action="/quiz/handleQuizStep" method="POST">
+                        <button type="submit" name="userInput" value="Start Quiz">Start Quiz</button>
+                    </form>
+                <% } %>
             <% } else { %>
-                <ul class="class">
-                    <li>
-                        <p><%= sessionData.question %></p>
-                    </li>
-                    <% if (sessionData.answers) { %>
-                        <% sessionData.answers.forEach(function(answer) { %>
-                            <li>
-                                <form action="/quiz" method="POST">
-                                    <button type="submit" class="answer-btn" name="userInput" value="<%= answer.text %>"><%= answer.text %></button>
-                                </form>
-                            </li>
-                        <% }); %>
-                    <% } %>
-                </ul>
-            <% } %>                                 
+                <!-- Display the final message -->
+                <p><%= sessionData.message %></p>
+            <% } %>
         </div>
     </main>
 </body>

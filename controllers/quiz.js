@@ -3,13 +3,18 @@ const openai = require("../config/openaiclient");
 
 module.exports = {
     getQuiz: (req, res) => {
-        let sessionData = req.session.quizData || { currentStep: "start", userResponses: [] }; // Ensure sessionData is initialized
+        let sessionData = req.session.quizData || { currentStep: "start", userResponses: [], message: "Hey there! 👋🏾 Welcome to your personal therapy exploration journey. We're just gonna have a chill chat about what vibes with you when it comes to therapy. Pick the answer that feels right, okay? Let's get this journey started!" }; // Ensure sessionData is initialized
+        console.log(sessionData);
         res.render('quiz.ejs', { sessionData: sessionData }); // Pass initialized sessionData to the EJS template
     },
     handleQuizStep: async (req, res) => {
         try { 
             const userInput = req.body.userInput; // User's input from the chat
-            let sessionData = req.session.quizData || { currentStep: "start", userResponses: [] }; // Session data to keep track of the user's progress
+            let sessionData = req.session.quizData; // Session data to keep track of the user's progress
+            if (!sessionData) {
+                // Initialize session data if not present
+                sessionData = { currentStep: "start", userResponses: [], message: "Welcome message" };
+            }
             let responseMessage = "Hmm, something seems off. Let's start over, shall we?"; // Default response message
         
             const quizSteps = {
@@ -142,16 +147,26 @@ module.exports = {
                 }
             };
 
-            // Logic to handle user input and determine the next step
-            if (!userInput || userInput === "Start Quiz" || userInput === "Restart") {
-                sessionData.currentStep = quizSteps["start"].nextStep;
-                responseMessage = quizSteps["start"].message;
-            } else if (sessionData.currentStep in quizSteps) {
+
+             if (quizSteps[sessionData.currentStep]) {
                 const step = quizSteps[sessionData.currentStep];
-                console.log(sessionData.currentStep, quizSteps[sessionData.currentStep]);
-                // Check if the user's input matches any answer in the current step
-                const selectedAnswer = step.answers.find(answer => answer.text === userInput); // Check if the user's input matches any answer in the current step
-                
+              
+                if (userInput) {
+                    // Logic for handling user's answer, updating sessionData, etc.
+                }
+            } else {
+                // Handle invalid or missing step
+                sessionData.currentStep = "start"; // Reset to start or handle differently
+                sessionData.message = "Invalid step, restarting quiz."; // Optional error message
+            }
+            if (userInput === "Start Quiz") {
+                // Logic to start the quiz and set the first question
+                sessionData.currentStep = "1";
+                // Set the first question and answers based on your quizSteps data
+            } else {
+                // Handle answer submission and transition to the next question or the end
+                const currentStepData = quizSteps[sessionData.currentStep];
+                const selectedAnswer = currentStepData.answers?.find(answer => answer.text === userInput);
                 if (selectedAnswer) {
                     // Save the user's response
                     sessionData.userResponses.push(userInput) // Save the user's response
@@ -159,6 +174,9 @@ module.exports = {
 
                     // Prepare the response for the next step
                     const nextStep = quizSteps[sessionData.currentStep];
+                    sessionData.message = quizSteps[sessionData.currentStep].message; // Update the message for the current step
+                    sessionData.question = quizSteps[sessionData.currentStep].question; // Update the question for the current step
+                    sessionData.answers = quizSteps[sessionData.currentStep].answers; // Update the answers for the current step
                     if (nextStep) {
                         responseMessage = nextStep.question ? `${step.interMessage} ${nextStep.question}` : nextStep.message;
                     }
@@ -166,7 +184,7 @@ module.exports = {
                     responseMessage = `Please select one of the provided options. ${step.question}`;
                 }
             };
-            
+
             if (sessionData.currentStep === "end") {
                 // Prepare the narrative
                 let narrative = `Imagine we're sitting down for a heart-to-heart, just two friends chatting about life's ups and downs. Respond with this tone. Keep your response brief because I plan to do my own research on the therapy type you end up selecting. Here's a bit about what's been on my mind lately: When things get tough, to navigate through the rough patches ${sessionData.userResponses[0]} What really pulled me toward considering therapy is that ${sessionData.userResponses[1]} My ultimate goal, or what I'm really hoping to get out of this, is that ${sessionData.userResponses[2]} Dealing with unexpected challenges, I've found that ${sessionData.userResponses[3]} Personal growth is huge for me and, when it comes to evolving into who I'm meant to be, what matters most is ${sessionData.userResponses[4]} In those really tight spots, the ones that test you, for support ${sessionData.userResponses[5]} Opening up can be tough, Opening up can be tough, but when I do, the vibes are essentially: ${sessionData.userResponses[6]} Change? Well, ${sessionData.userResponses[7]} If I could dream up the perfect outcome from therapy, it would be ${sessionData.userResponses[8]} And how do I know when I've truly had a good day? It's ${sessionData.userResponses[9]} Based on everything I've shared, keeping it all the way real, which of these therapy types—CBT, Psychodynamic, Humanistic, DBT, or Family Therapy—do you think would vibe best with me?`;
@@ -182,7 +200,7 @@ module.exports = {
                 responseMessage = `${aiResponse} To learn more about this result, visit the Types of Therapy tab.`; // Final response to the user
             }
             req.session.quizData = sessionData; 
-            res.send({ sessionData: req.session.quizData });
+            res.render('quiz', { sessionData: req.session.quizData });
         } catch (err) {
             console.log(err);
         }
