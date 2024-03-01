@@ -136,9 +136,13 @@ module.exports = {
         if (!req.session.quizData) {
             req.session.quizData = { currentStep: "", selectedAnswers: [] };
         }
-        const stepData = req.session.quizData.currentStep ? quizSteps[req.session.quizData.currentStep] : "";
-        res.render("quiz.ejs", { stepData });
-      },
+        let stepData = null;
+        if (req.session.quizData.currentStep) {
+            stepData = quizSteps[req.session.quizData.currentStep];
+        }
+        const isStartStep = req.session.quizData.currentStep === "start";
+        res.render("quiz.ejs", { stepData, isStartStep });
+    },
 
     // Function to start or continue the quiz
     handleQuizStep: async (req, res) => {
@@ -177,13 +181,11 @@ module.exports = {
         }
 
         // Render the current step of the quiz
-        const stepData = quizSteps[currentStep];
-        if (!stepData) {
-            // Handle invalid step, e.g., redirect to start or show an error
-            console.error('Invalid step:', currentStep);
-            return res.redirect('/quiz/start');
+        let stepData = null;
+        if (currentStep && quizSteps[currentStep]) {
+            stepData = quizSteps[currentStep];
         }
-        res.render('quiz', { stepData, selectedAnswers });
+        res.render('quiz', { stepData, selectedAnswers, isStartStep: currentStep === "start" });
         } catch (err) {
             console.error(err);
             res.status(500).send('An error occurred');

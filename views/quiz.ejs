@@ -23,23 +23,28 @@
 
     
         <div id="quiz-container">
-            <% if (stepData && stepData.interMessage) { %>
-                <h2><%= stepData.interMessage %></h2>
-               <% if (stepData.question) { %>
-                 <h2><%= stepData.question %></h2>
-                 <ul>
-                   <% stepData.answers.forEach(answer => { %>
-                     <li>
-                       <form action="/quiz/handleQuizStep" method="POST">
-                         <button type="submit" name="userInput" value="<%= answer.text %>">
-                           <%= answer.text %>
-                         </button>
-                       </form>
-                     </li>
-                   <% }); %>
-                 </ul>
-               <% } %>
-            <% } %>  
+          <% if (stepData && stepData.interMessage) { %>
+            <h2><%= stepData.interMessage %></h2>
+          <% } %>
+        
+          <% if (isStartStep) { %>
+              <form action="/quiz/handleQuizStep" method="POST">
+                  <button type="submit" name="action" value="start">Start Quiz</button>
+              </form>
+          <% } else if (stepData && stepData.question) { %>
+              <h2><%= stepData.question %></h2>
+              <ul>
+                  <% stepData.answers.forEach(answer => { %>
+                      <li>
+                          <form action="/quiz/handleQuizStep" method="POST">
+                              <button type="submit" name="userInput" value="<%= answer.text %>">
+                                  <%= answer.text %>
+                              </button>
+                          </form>
+                      </li>
+                  <% }); %>
+              </ul>
+          <% } %> 
         </div>
     </main>
 </body>
