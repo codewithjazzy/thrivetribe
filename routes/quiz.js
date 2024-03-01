@@ -4,6 +4,7 @@ const quizController = require("../controllers/quiz");
 
 // Quiz Routes
 router.get("/", quizController.getQuiz);
-router.post("/api", quizController.aiPrompt);
+router.post("/handleQuizStep", quizController.handleQuizStep); 
+router.post("/api", quizController.quizAiPrompt);
 
 module.exports = router;
