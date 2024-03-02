@@ -6,5 +6,11 @@ const quizController = require("../controllers/quiz");
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);
 //routes to all static pages will go here
+router.get("/about", homeController.getAbout);
+router.get("/therapistFinder", homeController.getTherapistFinder);
+router.get("/typesOfTherapy", homeController.getTypesOfTherapy);
+router.get("/therapy101", homeController.getTherapy101);
+router.get("/blog", homeController.getBlog);
+router.get("/therapistPortal", homeController.getTherapistPortal);
 
 module.exports = router;
