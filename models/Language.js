@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const languageSchema = new mongoose.Schema({
     language: {
@@ -7,6 +7,6 @@ const languageSchema = new mongoose.Schema({
     },
 });
 
-const Language = mongoose.model('Language', languageSchema);
+const Language = mongoose.model("Language", languageSchema);
 
 module.exports = Language;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const treatmentSchema = new mongoose.Schema({
     treatment: { 
@@ -7,6 +7,6 @@ const treatmentSchema = new mongoose.Schema({
     },
 });
 
-const Treatment = mongoose.model('Treatment', treatmentSchema);
+const Treatment = mongoose.model("Treatment", treatmentSchema);
 
 module.exports = Treatment;

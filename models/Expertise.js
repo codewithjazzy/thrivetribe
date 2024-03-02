@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const expertiseSchema = new mongoose.Schema({
     expertise: { 
@@ -7,6 +7,6 @@ const expertiseSchema = new mongoose.Schema({
     },
 });
 
-const Expertise = mongoose.model('Expertise', expertiseSchema);
+const Expertise = mongoose.model("Expertise", expertiseSchema, "expertise");
 
 module.exports = Expertise;
