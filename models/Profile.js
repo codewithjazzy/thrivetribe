@@ -1,6 +1,7 @@
+const validator = require('validator');
 const mongoose = require("mongoose"); // connects to and communicates with database to use schemas
 
-//Schemas give the database structure. Maintainability. It is like a template for the DB 
+// Profile Schema
 const ProfileSchema = new mongoose.Schema({
   image: {
     type: String,
@@ -30,10 +31,8 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: function(email) {
-        // Simple regex for email validation; you might want to use a more complex one depending on your needs
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email.toLowerCase());
+      validator: function(v) {
+        return validator.isEmail(v);
       },
       message: props => `${props.value} is not a valid email address!`
     }
@@ -41,16 +40,20 @@ const ProfileSchema = new mongoose.Schema({
   phone: {
     type: String,
     validate: {
-      validator: function(phone) {
-        // Simple regex for US phone number validation;
-        const re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-        return re.test(phone);
+      validator: function(v) {
+        return validator.isMobilePhone(v, 'en-US');
       },
       message: props => `${props.value} is not a valid phone number!`
     }
   },
   website: {
     type: String,
+    validate: {
+      validator: function(v) {
+        return validator.isURL(v);
+      },
+      message: props => `${props.value} is not a valid URL!`
+    }
   },
   expertise: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -68,13 +71,13 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Dialect",
   }],
-  location: {
+  locations: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Location",
   },
 });
 
-module.exports = mongoose.model("Profile", ProfileSchema); //module.exports is used in the posts controller
+module.exports = mongoose.model("Profile", ProfileSchema); //module.exports is used in the profiles controller
 
 //"Profile" will become plural and lowercase as db collection name. to change this, use the third argument in the model method
 //module.exports = mongoose.model("ModelName", SchemaObject, "customCollectionName"); __SYNTAX
