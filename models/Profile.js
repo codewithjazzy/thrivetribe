@@ -9,7 +9,11 @@ const ProfileSchema = new mongoose.Schema({
   cloudinaryId: {
     type: String,
   },
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
     type: String,
     required: true,
   },
@@ -71,7 +75,7 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Dialect",
   }],
-  locations: {
+  location: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Location",
   },
