@@ -182,8 +182,6 @@ module.exports = {
             // Determine the next step based on the current step's configuration
             const nextStep = quizSteps[currentStep].nextStep;
             req.session.quizData.currentStep = nextStep;
-            console.log("User input received:", req.body.userInput);
-            console.log("Next step:", nextStep);
         }
 
         // Render the current step of the quiz
@@ -202,7 +200,7 @@ module.exports = {
     quizAiPrompt: async (req, res) => {
         try {
             const { selectedAnswers } = req.session.quizData; // Destructure to get selectedAnswers from session data
-            let narrative = `Imagine we're sitting down for a heart-to-heart, just two friends chatting about life's ups and downs. Respond with this tone and try to match my tone if you can. Keep your response brief because I plan to do my own research on the therapy type you end up selecting. Here's a bit about what's been on my mind lately: When things get tough, to navigate through the rough patches ${selectedAnswers[0]} What really pulled me toward considering therapy is that ${selectedAnswers[1]} My ultimate goal, or what I'm really hoping to get out of this, is that ${selectedAnswers[2]} Dealing with unexpected challenges, I've found that ${selectedAnswers[3]} Personal growth is huge for me and, when it comes to evolving into who I'm meant to be, what matters most is ${selectedAnswers[4]} In those really tight spots, the ones that test you, for support ${selectedAnswers[5]} Opening up can be tough, Opening up can be tough, but when I do, the vibes are essentially: ${selectedAnswers[6]} Change? Well, ${selectedAnswers[7]} If I could dream up the perfect outcome from therapy, it would be ${selectedAnswers[8]} And how do I know when I've truly had a good day? It's ${selectedAnswers[9]} Based on everything I've shared, keeping it all the way real, which of these therapy types—CBT, Psychodynamic, Humanistic, DBT, or Family Therapy—do you think would vibe best with me?`;
+            let narrative = `Imagine we're sitting down for a heart-to-heart, just two friends chatting about life's ups and downs. Respond with this tone in mind and try to match my tone. Keep your response brief because I plan to do my own research on the therapy type you end up selecting. Here's a bit about what's been on my mind lately: When things get tough, to navigate through the rough patches ${selectedAnswers[0]} What really pulled me toward considering therapy is that ${selectedAnswers[1]} My ultimate goal, or what I'm really hoping to get out of this, is that ${selectedAnswers[2]} Dealing with unexpected challenges, I've found that ${selectedAnswers[3]} Personal growth is huge for me and, when it comes to evolving into who I'm meant to be, what matters most is ${selectedAnswers[4]} In those really tight spots, the ones that test you, for support ${selectedAnswers[5]} Opening up can be tough, Opening up can be tough, but when I do, the vibes are essentially: ${selectedAnswers[6]} Change? Well, ${selectedAnswers[7]} If I could dream up the perfect outcome from therapy, it would be ${selectedAnswers[8]} And how do I know when I've truly had a good day? It's ${selectedAnswers[9]} Based on everything I've shared, keeping it all the way real, which of these therapy types—CBT, Psychodynamic, Humanistic, DBT, or Family Therapy—do you think would vibe best with me?`;
 
             const response = await openai.chat.completions.create({
                 model: 'gpt-3.5-turbo',

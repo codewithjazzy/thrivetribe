@@ -11,6 +11,7 @@ const connectDB = require("./config/database");
 const openai = require('./config/openaiclient'); // Import the OpenAI client
 const mainRoutes = require("./routes/main");
 const quizRoutes = require("./routes/quiz");
+const profileRoutes = require("./routes/profile");
 
 
 require("dotenv").config({ path: "./config/.env" }); //
@@ -37,6 +38,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/quiz", quizRoutes);
+app.use("/", profileRoutes);
 //Server Running
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");

@@ -1,2 +1,82 @@
 <%- include('partials/header') %>
+
+<main class="mx-auto px-16 my-8">
+<h1 class="text-4xl font-bold text-center pb-12">Therapist Signup</h1>
+    <form action="/therapist-signup" method="POST">
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+        </div>
+        <div>
+            <label for="title">Title(s):</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div>
+            <label for="bio">Please enter your professional biography here:</label>
+            <textarea type="text" id="bio" name="bio" required></textarea>
+        </div>
+        <div>
+            <label for="journey">What inspired you to become a therapist, and how does your background influence your practice?</label>
+            <textarea type="text" id="journey" name="journey" required></textarea>
+        </div>
+        <div>
+            <label for="heritage">Describe your cultural heritage and how it influences your approach to therapy</label>
+            <textarea type="text" id="heritage" name="heritage" required></textarea>
+        </div>
+        <!-- Include other fields like title, bio, journey, heritage, email, phone, and website here -->
+
+        <div>
+            <label>Expertise:</label>
+            <% expertise.forEach(function(expert) { %>
+                <div>
+                    <input type="checkbox" name="expertise[]" value="<%= expertise._id %>"> <%= expert.expertise %>
+                </div>
+            <% }); %>
+        </div>
+
+        <div>
+            <label>Treatments:</label>
+            <% treatments.forEach(function(treatment) { %>
+                <div>
+                    <input type="checkbox" name="treatments[]" value="<%= treatment._id %>"> <%= treatment.treatment%>
+                </div>
+            <% }); %>
+        </div>
+
+        <div>
+            <label>Languages:</label>
+            <% languages.forEach(function(language) { %>
+                <div>
+                    <input type="checkbox" name="languages[]" value="<%= language._id %>"> <%= language.language %>
+                </div>
+            <% }); %>
+        </div>
+
+        <div>
+            <label>Dialects:</label>
+            <div class="flex flex-wrap gap-12">
+                <% dialects.forEach(function(dialect) { %>
+                    <div>
+                        <input type="checkbox" name="dialects[]" value="<%= dialect._id %>"> <%= dialect.dialect %>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+
+        <div>
+            <label for="location">Location:</label>
+            <select id="location" name="location">
+                <% locations.forEach(function(location) { %>
+                    <option value="<%= location._id %>"><%= location.state %></option>
+                <% }); %>
+            </select>
+        </div>
+
+        <button type="submit" class="mt-2 px-4 py-2 text-white bg-blue-500 rounded">Sign Up</button>
+    </form>
+</main>
 <%- include('partials/footer') %>
