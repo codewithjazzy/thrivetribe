@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapy Type Quiz</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <section>
+                <h1>Welcome to Your Personal Therapy Exploration Quiz!</h1>
+                <p>Embarking on a journey toward mental wellness is a brave and transformative step. This quiz is designed to be your companion as you explore the therapeutic paths that might resonate with your unique experiences and emotional landscape.</p>
+                <p>Our goal is to introduce you to various therapy styles through a series of thoughtful questions. By reflecting on your preferences, coping mechanisms, and emotional tendencies, we aim to provide you with insights that could guide you toward the most compatible therapeutic approaches.</p>
+                <p>Ready to Begin? Dive in with an open heart and an open mind. Your journey to deeper self-understanding starts here. When you're ready, hit the "Take Quiz" button, and let's explore the therapeutic possibilities together.</p>
+
+                <% if (!currentStep) { %>
+                    <div class="button">
+                        <form action="/quiz/handleQuizStep" method="POST">
+                            <button type="submit" name="action" value="takeQuiz">Take Quiz</button>
+                        </form>  
+                    </div>
+                <% } %>
+            </section>
+        </div>
+
+    
+        <div id="quiz-container">
+          <% if (stepData && stepData.interMessage) { %>
+            <h2><%= stepData.interMessage %></h2>
+          <% } %>
+        
+          <% if (isStartStep) { %>
+              <form action="/quiz/handleQuizStep" method="POST">
+                  <button type="submit" name="action" value="start">Start Quiz</button>
+              </form>
+          <% } else if (stepData && stepData.question) { %>
+              <h2><%= stepData.question %></h2>
+              <ul>
+                  <% stepData.answers.forEach(answer => { %>
+                      <li>
+                          <form action="/quiz/handleQuizStep" method="POST">
+                              <button type="submit" name="userInput" value="<%= answer.text %>">
+                                  <%= answer.text %>
+                              </button>
+                          </form>
+                      </li>
+                  <% }); %>
+              </ul>
+          <% } %> 
+          <% if (isEndStep && !aiResponse) { %>
+            <div class="button">
+                <form action="/quiz/AIresults" method="POST">
+                    <button type="submit" name="action" value="results">See Results</button>
+                </form>  
+            </div>
+            <% } %>
+            <% if (aiResponse) { %>
+                <div class="ai-response">
+                    <h3>Your personalized therapy recommendation:</h3>
+                    <p><%= aiResponse %></p>
+                </div>
+            <% } %>
+            <% if (currentStep !== "start" && currentStep !== "" || aiResponse) { %>
+                <div class="button">
+                    <form action="/quiz/handleQuizStep" method="POST">
+                        <button type="submit" name="action" value="restart">Restart Quiz</button>
+                    </form>
+                </div>
+            <% } %>
+
+        </div>
+    </main>
+</body>
+</html>
