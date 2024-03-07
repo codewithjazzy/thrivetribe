@@ -34,4 +34,15 @@ module.exports = {
             res.sendStatus(500); // or render an error page
         }
     },
+    getTherapistProfile: async (req, res) => {
+        try {
+            const therapistId = req.params.id;
+            const therapist = await Profile.findById(therapistId)
+                .populate('expertise treatments languages dialects location');
+            res.render('provider.ejs', { therapist });
+        } catch (error) {
+            console.error('Error fetching therapist details:', error);
+            res.status(500).send('An error occurred while fetching therapist details.');
+        }
+    }
 };
