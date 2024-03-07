@@ -3,34 +3,36 @@
 <main class="mx-auto px-16 my-8">
 <h1 class="text-4xl font-bold text-center pb-12">Therapist Signup</h1>
     <form action="/therapist-signup" method="POST">
-        <div>
+        <div class="text-lg font-semibold py-4">
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" required>
+            <input type="text" id="firstName" name="firstName" required class="w-1/2 border border-gray-300">
         </div>
-        <div>
+        <div class="text-lg font-semibold py-4">
             <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required>
+            <input type="text" id="lastName" name="lastName" required class="w-1/2 border border-gray-300">
         </div>
-        <div>
+        <div class="text-lg font-semibold py-4">
             <label for="title">Title(s):</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" name="title" required class="w-1/2 border border-gray-300">
         </div>
-        <div>
+        <div class="text-lg font-semibold py-4">
             <label for="bio">Please enter your professional biography here:</label>
-            <textarea type="text" id="bio" name="bio" required></textarea>
+            <br>
+            <textarea type="text" id="bio" name="bio" required class="w-4/5 border border-gray-300"></textarea>
         </div>
-        <div>
+        <div class="text-lg font-semibold py-4">
             <label for="journey">What inspired you to become a therapist, and how does your background influence your practice?</label>
-            <textarea type="text" id="journey" name="journey" required></textarea>
+            <br>
+            <textarea type="text" id="journey" name="journey" required class="w-3/4 h-28 border border-gray-300"></textarea>
         </div>
-        <div>
+        <div class="text-lg font-semibold py-4">
             <label for="heritage">Describe your cultural heritage and how it influences your approach to therapy</label>
-            <textarea type="text" id="heritage" name="heritage" required></textarea>
+            <br>
+            <textarea type="text" id="heritage" name="heritage" required class="w-3/4 border border-gray-300"></textarea>
         </div>
         <!-- Include other fields like title, bio, journey, heritage, email, phone, and website here -->
-
-        <div>
-            <label>Expertise:</label>
+        <h3 class="text-lg font-semibold py-8">Select your Specialties and areas of Expertise</h3>
+        <div class="grid grid-cols-2 xl:grid-cols-3 gap-4">
             <% expertise.forEach(function(expert) { %>
                 <div>
                     <input type="checkbox" name="expertise[]" value="<%= expertise._id %>"> <%= expert.expertise %>
@@ -38,8 +40,8 @@
             <% }); %>
         </div>
 
-        <div>
-            <label>Treatments:</label>
+        <h3 class="text-lg font-semibold py-8">Select your treatment approaches</h3>
+        <div class="grid grid-cols-2 xl:grid-cols-3 gap-4">
             <% treatments.forEach(function(treatment) { %>
                 <div>
                     <input type="checkbox" name="treatments[]" value="<%= treatment._id %>"> <%= treatment.treatment%>
@@ -47,8 +49,8 @@
             <% }); %>
         </div>
 
-        <div>
-            <label>Languages:</label>
+        <h3 class="text-lg font-semibold py-8">Select your spoken languages</h3>
+        <div class="grid grid-cols-2 xl:grid-cols-3 gap-4">
             <% languages.forEach(function(language) { %>
                 <div>
                     <input type="checkbox" name="languages[]" value="<%= language._id %>"> <%= language.language %>
@@ -56,20 +58,19 @@
             <% }); %>
         </div>
 
-        <div>
-            <label>Dialects:</label>
-            <div class="flex flex-wrap gap-12">
+        <h3 class="text-lg font-semibold py-8">Select your spoken dialects</h3>
+        <div class="grid grid-cols-2 xl:grid-cols-3 gap-4">
                 <% dialects.forEach(function(dialect) { %>
                     <div>
                         <input type="checkbox" name="dialects[]" value="<%= dialect._id %>"> <%= dialect.dialect %>
                     </div>
                 <% }); %>
-            </div>
         </div>
 
-        <div>
-            <label for="location">Location:</label>
-            <select id="location" name="location">
+        <div class="py-8">
+            <label for="location" class="text-lg font-semibold py-8">Location:</label>
+            <br>
+            <select id="location" name="location" class="border border-gray-300">
                 <% locations.forEach(function(location) { %>
                     <option value="<%= location._id %>"><%= location.state %></option>
                 <% }); %>
