@@ -2,11 +2,11 @@
 
 <main class="container mx-auto my-4 pt-4 pb-8">
     <div class="container">
-        <section>
+        <section class="text-pretty">
             <h1 class="text-4xl font-bold pb-8">Welcome to Your Personal Therapy Exploration Quiz!</h1>
-            <p>Embarking on a journey toward mental wellness is a brave and transformative step. This quiz is designed to be your companion as you explore the therapeutic paths that might resonate with your unique experiences and emotional landscape.</p>
-            <p>Our goal is to introduce you to various therapy styles through a series of thoughtful questions. By reflecting on your preferences, coping mechanisms, and emotional tendencies, we aim to provide you with insights that could guide you toward the most compatible therapeutic approaches.</p>
-            <p>Ready to Begin? Dive in with an open heart and an open mind. Your journey to deeper self-understanding starts here. When you're ready, hit the "Take Quiz" button, and let's explore the therapeutic possibilities together.</p>
+            <p class="indent-8">Embarking on a journey toward mental wellness is a brave and transformative step. This quiz is designed to be your companion as you explore the therapeutic paths that might resonate with your unique experiences and emotional landscape.</p>
+            <p class="indent-8">Our goal is to introduce you to various therapy styles through a series of thoughtful questions. By reflecting on your preferences, coping mechanisms, and emotional tendencies, we aim to provide you with insights that could guide you toward the most compatible therapeutic approaches.</p>
+            <p class="indent-8">Ready to Begin? Dive in with an open heart and an open mind. Your journey to deeper self-understanding starts here. When you're ready, hit the "Take Quiz" button, and let's explore the therapeutic possibilities together.</p>
             <% if (!currentStep) { %>
               <div class="text-center py-8">
                 <form action="/quiz/handleQuizStep" method="POST">
@@ -50,20 +50,20 @@
           <% if (isEndStep && !aiResponse) { %>
             <div class="button">
                 <form action="/quiz/AIresults" method="POST">
-                    <button type="submit" name="action" value="results" class="bg-lime-300 rounded-full px-4 py-2">See Results</button>
+                    <button type="submit" name="action" value="results" class="bg-teal-500 rounded-full px-4 py-4">See Results</button>
                 </form>  
             </div>
             <% } %>
             <% if (aiResponse) { %>
-                <div class="ai-response">
-                    <h3>Results:</h3>
-                    <p><%= aiResponse %></p>
+                <div class="ai-response text-center">
+                    <h3 class="font-semibold">Results:</h3>
+                    <p class="text-pretty indent-4"><%= aiResponse %></p>
                 </div>
             <% } %>
             <% if (currentStep !== "start" && currentStep !== "" || aiResponse) { %>
                 <div class="button">
                     <form action="/quiz/handleQuizStep" method="POST">
-                        <button type="submit" name="action" value="restart" class="bg-pink-200 rounded-full px-4 py-2">Restart Quiz</button>
+                        <button type="submit" name="action" value="restart" class="bg-pink-200 rounded-full px-4 py-4">Restart Quiz</button>
                     </form>
                 </div>
             <% } %>
