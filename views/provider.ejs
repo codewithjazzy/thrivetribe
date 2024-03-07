@@ -1,0 +1,69 @@
+<%- include('partials/header') %>
+
+<main class="mx-auto px-16 my-8">
+    <div class="container card bg-white rounded-lg py-8 px-16" style="border: 1px solid black;">
+        <section class="flex flex-col">
+            <div class="flex flex-col items-center">
+                <img src="<%= therapist.image.replace('/upload/', '/upload/w_300,h_300,c_fill/') %>" alt="Profile Picture" class="rounded-full space-y-4">
+                <h2 class="text-center text-3xl font-semibold"><%= therapist.firstName %> <%= therapist.lastName %>, <%= therapist.title %></h2>
+                <p class="text-center pb-4"><%= therapist.location.state %></p>
+            </div>
+
+            <div class="pb-8">
+                <h4 class="font-semibold">Contact</h4>
+                <p>Email: <%= therapist.email %></p>
+                <p>Phone: <%= therapist.phone %></p>
+                <p>Website: <%= therapist.website %></p>
+            </div>
+
+            <div class="text-pretty py-4">
+                <h4 class="text-lg font-semibold">Professional Bio</h4>
+                <p class="indent-8"><%= therapist.bio %></p>
+            </div>
+            <div class="text-pretty py-4">
+                <h4 class="text-lg font-semibold">Personal Journey</h4>
+                <p class="indent-8"><%= therapist.journey %></p>
+            </div>
+            <div class="text-pretty py-4">
+                <h4 class="text-lg font-semibold">Cultural Heritage</h4>
+                <p class="indent-8"><%= therapist.heritage %></p>
+            </div>
+
+            <div class="py-4">
+                <h3 class="text-lg font-semibold">Specialties and Expertise</h3>
+                <ul>
+                    <% therapist.expertise.forEach(expert => { %>
+                        <li><%= expert.expertise %></li>
+                    <% }); %>
+                </ul>
+            </div>
+            <div class="py-4">
+                <h3 class="text-lg font-semibold">Treatment Approaches</h3>
+                <ul>
+                    <% therapist.treatments.forEach(treatment => { %>
+                        <li><%= treatment.treatment %></li>
+                    <% }); %>
+                </ul>
+            </div>
+            <div class="py-4">
+                <h3 class="text-lg font-semibold">Spoken Languages</h3>
+                <ul>
+                    <% therapist.languages.forEach(language => { %>
+                        <li><%= language.language %></li>
+                    <% }); %>
+                </ul>
+            </div>
+            <div class="py-4">
+                <h3 class="text-lg font-semibold">Spoken Dialects</h3>
+                <ul>
+                    <% therapist.dialects.forEach(dialect => { %>
+                        <li><%= dialect.dialect %></li>
+                    <% }); %>
+                </ul>
+            </div> 
+        </section>
+    </div>
+</main>
+
+
+<%- include('partials/footer') %>

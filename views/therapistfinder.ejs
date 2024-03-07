@@ -24,7 +24,7 @@
                     </div>
                     <p class="mt-2"><%= profiles[i].bio %></p>
                     <div class="flex-grow"></div>
-                    <button class="mt-2 px-4 py-2 text-white bg-blue-500 rounded">View Profile</button>
+                    <a href="/profile/<%= profiles[i]._id %>" class="mt-2 px-4 py-2 text-white bg-blue-500 rounded inline-block text-center">View Profile</a>
                 </section>
             </div>
             <% } %>
