@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <main class="container mx-auto my-4 pt-4 pb-8">
-    <div class="container">
+    <div class="p-8">
         <section class="text-pretty">
             <h1 class="text-4xl font-bold pb-8">Welcome to Your Personal Therapy Exploration Quiz!</h1>
             <p class="indent-8">Embarking on a journey toward mental wellness is a brave and transformative step. This quiz is designed to be your companion as you explore the therapeutic paths that might resonate with your unique experiences and emotional landscape.</p>
@@ -19,7 +19,7 @@
     </div>
 
 
-    <div id="quiz-container" class="box-content size-3/4 p-4 border-4" style="margin: 0 auto;">
+    <div id="quiz-container" class="box-content size-3/4 p-8 border-4" style="margin: 0 auto;">
         <% if (stepData && stepData.interMessage) { %>
         <div class="inline-block">
             <h2 class="text-left mb-4 bg-sky-300 rounded-full px-4 py-2"><%= stepData.interMessage %></h2>
@@ -57,13 +57,13 @@
             <% if (aiResponse) { %>
                 <div class="ai-response text-center">
                     <h3 class="font-semibold">Results:</h3>
-                    <p class="text-pretty indent-4"><%= aiResponse %></p>
+                    <p class="text-pretty indent-4 pb-8"><%= aiResponse %></p>
                 </div>
             <% } %>
             <% if (currentStep !== "start" && currentStep !== "" || aiResponse) { %>
                 <div class="button">
                     <form action="/quiz/handleQuizStep" method="POST">
-                        <button type="submit" name="action" value="restart" class="bg-pink-200 rounded-full px-4 py-4">Restart Quiz</button>
+                        <button type="submit" name="action" value="restart" class="bg-pink-200 rounded-full px-4 py-2">Restart Quiz</button>
                     </form>
                 </div>
             <% } %>
