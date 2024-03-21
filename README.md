@@ -33,7 +33,6 @@ ThriveTribe is a compassionate web platform tailored specifically for Black wome
 ![App Screenshot3](https://res.cloudinary.com/dwy2rcep0/image/upload/v1709789673/quiz2_lzz0o9.png)
 ![App Screenshot4](https://res.cloudinary.com/dwy2rcep0/image/upload/v1709789673/blog_xe43ly.png)
 ![App Screenshot5](https://res.cloudinary.com/dwy2rcep0/image/upload/v1709789673/language_dialect_k8vzci.png)
-![App Screenshot6](https://res.cloudinary.com/dwy2rcep0/image/upload/v1709789673/language_dialect_k8vzci.png)
 
 
 ### Links
