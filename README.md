@@ -37,7 +37,7 @@ ThriveTribe is a compassionate web platform tailored specifically for Black wome
 
 ### Links
 
-- Live Site URL: [Here](https://thrivetribe.onrender.com/)
+- Live Site URL: [Here](https://thrivetribe.jasminetaylor.dev/)
 - Repository URL: [Here](https://github.com/codewithjazzy/thrivetribe)
 
 ## My process
