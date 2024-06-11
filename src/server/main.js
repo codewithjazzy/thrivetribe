@@ -1,8 +1,8 @@
 import express from "express";
 import ViteExpress from "vite-express";
-import 'dotenv/config'
+import "dotenv/config"
 import mongoose from "mongoose";
-
+import openai from "./config/openaiclient"
 
 const app = express();
 
