@@ -1,10 +1,15 @@
-const express = require("express");
-const router = express.Router();
-const quizController = require("../controllers/quiz");
+import { Router } from "express";
+import {
+    getQuiz,
+    handleQuizStep,
+    quizAiPrompt,
+} from "../controllers/quiz";
 
-// Quiz Routes
-router.get("/", quizController.getQuiz);
-router.post("/handleQuizStep", quizController.handleQuizStep); 
-router.post("/AIresults", quizController.quizAiPrompt);
+const router = Router();
 
-module.exports = router;
+router.get("/", getQuiz);
+router.post("/handleQuizStep", handleQuizStep); 
+router.post("/AIresults", quizAiPrompt);
+
+
+export default router;

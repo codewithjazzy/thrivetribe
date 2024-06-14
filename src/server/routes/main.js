@@ -1,17 +1,25 @@
-const express = require("express");
-const router = express.Router();
-const homeController = require("../controllers/home");
-const quizController = require("../controllers/quiz");
-const profileController = require("../controllers/profile");
+import { Router } from "express";
+import {
+    getIndex,
+    getAbout,
+    getTypesOfTherapy,
+    getTherapy101,
+    getBlog,
+    getTherapistPortal,
+    getTherapistFinder,
+    getTherapistProfile
+} from "../controllers/home";
 
-//Main Routes - simplified for now
-router.get("/", homeController.getIndex);
+const router = Router();
+
+router.get("/", getIndex);
 //routes to all static pages will go here
-router.get("/about", homeController.getAbout);
-router.get("/therapistFinder", homeController.getTherapistFinder);
-router.get("/profile/:id", homeController.getTherapistProfile);
-router.get("/typesOfTherapy", homeController.getTypesOfTherapy);
-router.get("/therapy101", homeController.getTherapy101);
-router.get("/blog", homeController.getBlog);
+router.get("/about", getAbout);
+router.get("/therapistFinder", getTherapistFinder);
+router.get("/profile/:id", getTherapistProfile);
+router.get("/typesOfTherapy", getTypesOfTherapy);
+router.get("/therapy101", getTherapy101);
+router.get("/blog", getBlog);
 
-module.exports = router;
+
+export default router;

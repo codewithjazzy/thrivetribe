@@ -8,6 +8,9 @@ import connectDB from "./config/database";
 import session from "express-session"
 import MongoStore from "connect-mongo";
 import morgan from "morgan";
+import mainRoutes from "./routes/main";
+import quizRoutes from "./routes/quiz";
+import profileRoutes from "./routes/profile";
 
 
 connectDB();
@@ -22,6 +25,12 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
   })
 );
+
+//Setup Routes For Which The Server Is Listening
+app.use("/", mainRoutes);
+app.use("/quiz", quizRoutes);
+app.use("/profile", profileRoutes);
+
 
 app.get("/hello", (req, res) => {
   res.send("Hello Vite + React!");

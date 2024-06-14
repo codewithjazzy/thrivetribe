@@ -1,9 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const homeController = require("../controllers/home");
-const quizController = require("../controllers/quiz");
-const profileController = require("../controllers/profile");
+import { Router } from "express";
+import { getTherapistPortal } from "../controllers/profile";
 
-router.get("/therapistportal", profileController.getTherapistPortal);
+const router = Router();
 
-module.exports = router;
+router.get("/therapistportal", getTherapistPortal);
+
+export default router;

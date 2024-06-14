@@ -1,4 +1,4 @@
-const openai = require("../config/openaiclient");
+import openai from ("../config/openaiclient");
 
 
 const quizSteps = {
@@ -131,89 +131,90 @@ const quizSteps = {
 };
 
 
-module.exports = {
-    getQuiz: (req, res) => {
-        if (!req.session.quizData) {
-            req.session.quizData = { currentStep: "", selectedAnswers: [] };
-        }
-        const currentStep = req.session.quizData.currentStep;
-        let stepData = null;
-        if (currentStep) {
-            stepData = quizSteps[req.session.quizData.currentStep];
-        }
-        const isStartStep = req.session.quizData.currentStep === "start";
-        const isEndStep = req.session.quizData.currentStep === "end";
-        const aiResponse = req.session.quizData.aiResponse || null;
-        res.render("quiz.ejs", { stepData, isStartStep, isEndStep, aiResponse, currentStep });
-    },
 
-    // Function to start or continue the quiz
-    handleQuizStep: async (req, res) => {
-        try {
-        // Initialize or retrieve existing session data
-        if (!req.session.quizData) {
-            req.session.quizData = { currentStep: "", selectedAnswers: [] };
-        }
+export const getQuiz = (req, res) => {
+    if (!req.session.quizData) {
+        req.session.quizData = { currentStep: "", selectedAnswers: [] };
+    }
+    const currentStep = req.session.quizData.currentStep;
+    let stepData = null;
+    if (currentStep) {
+        stepData = quizSteps[req.session.quizData.currentStep];
+    }
+    const isStartStep = req.session.quizData.currentStep === "start";
+    const isEndStep = req.session.quizData.currentStep === "end";
+    const aiResponse = req.session.quizData.aiResponse || null;
+    res.render("quiz.ejs", { stepData, isStartStep, isEndStep, aiResponse, currentStep });
+};
 
-        const { currentStep, selectedAnswers } = req.session.quizData;
 
-        // Handle 'Start', 'Restart', 'Take Quiz' and 'Results' button
-        if (req.body.action === "takeQuiz") {
-            //initialize the quiz
-            req.session.quizData = { currentStep: "start", selectedAnswers: [] };
-            return res.redirect('/quiz'); // Redirect to start message
-        } else if (req.body.action === "start" || req.body.action === "restart") {
-            // Start the quiz at the first question
-            req.session.quizData = { currentStep: "1", selectedAnswers: [] };
-            delete req.session.aiResponse; // Clear the AI response
-            return res.redirect('/quiz'); // Redirect to the first question
-        } else if (req.body.action === "results") {
-            // Proceed to results and AI narrative generation
-            console.log("Selected Answers:", req.session.quizData.selectedAnswers);
-            /* this button needs to call the quizAiPrompt function and return the results from the Model */
-            return res.redirect('/quiz/results');
-        }
+// Function to start or continue the quiz
+export const handleQuizStep = async (req, res) => {
+    try {
+    // Initialize or retrieve existing session data
+    if (!req.session.quizData) {
+        req.session.quizData = { currentStep: "", selectedAnswers: [] };
+    }
 
-        // Handle user's answer selection
-        if (req.body.userInput) {
-            // Save the user's response
-            selectedAnswers.push(req.body.userInput);
+    const { currentStep, selectedAnswers } = req.session.quizData;
 
-            // Determine the next step based on the current step's configuration
-            const nextStep = quizSteps[currentStep].nextStep;
-            req.session.quizData.currentStep = nextStep;
-        }
+    // Handle 'Start', 'Restart', 'Take Quiz' and 'Results' button
+    if (req.body.action === "takeQuiz") {
+        //initialize the quiz
+        req.session.quizData = { currentStep: "start", selectedAnswers: [] };
+        return res.redirect('/quiz'); // Redirect to start message
+    } else if (req.body.action === "start" || req.body.action === "restart") {
+        // Start the quiz at the first question
+        req.session.quizData = { currentStep: "1", selectedAnswers: [] };
+        delete req.session.aiResponse; // Clear the AI response
+        return res.redirect('/quiz'); // Redirect to the first question
+    } else if (req.body.action === "results") {
+        // Proceed to results and AI narrative generation
+        console.log("Selected Answers:", req.session.quizData.selectedAnswers);
+        /* this button needs to call the quizAiPrompt function and return the results from the Model */
+        return res.redirect('/quiz/results');
+    }
 
-        // Render the current step of the quiz
-        let stepData = null;
-        if (currentStep && quizSteps[currentStep]) {
-            stepData = quizSteps[currentStep];
-        }
-        res.redirect('/quiz'); // Redirect to the next question
-        } catch (err) {
-            console.error(err);
-            res.status(500).send('An error occurred');
-        }
-    },
+    // Handle user's answer selection
+    if (req.body.userInput) {
+        // Save the user's response
+        selectedAnswers.push(req.body.userInput);
 
-    // Function to generate the AI narrative based on the user's quiz responses
-    quizAiPrompt: async (req, res) => {
-        try {
-            const { selectedAnswers } = req.session.quizData; // Destructure to get selectedAnswers from session data
-            let narrative = `Imagine we're sitting down for a heart-to-heart, just two friends chatting about life's ups and downs. Respond with this tone in mind and try to match my tone. Keep your response brief because I plan to do my own research on the therapy type you end up selecting. Here's a bit about what's been on my mind lately: When things get tough, to navigate through the rough patches ${selectedAnswers[0]} What really pulled me toward considering therapy is that ${selectedAnswers[1]} My ultimate goal, or what I'm really hoping to get out of this, is that ${selectedAnswers[2]} Dealing with unexpected challenges, I've found that ${selectedAnswers[3]} Personal growth is huge for me and, when it comes to evolving into who I'm meant to be, what matters most is ${selectedAnswers[4]} In those really tight spots, the ones that test you, for support ${selectedAnswers[5]} Opening up can be tough, Opening up can be tough, but when I do, the vibes are essentially: ${selectedAnswers[6]} Change? Well, ${selectedAnswers[7]} If I could dream up the perfect outcome from therapy, it would be ${selectedAnswers[8]} And how do I know when I've truly had a good day? It's ${selectedAnswers[9]} Based on everything I've shared, keeping it all the way real, which of these therapy types—CBT, Psychodynamic, Humanistic, DBT, or Family Therapy—do you think would vibe best with me?`;
+        // Determine the next step based on the current step's configuration
+        const nextStep = quizSteps[currentStep].nextStep;
+        req.session.quizData.currentStep = nextStep;
+    }
 
-            const response = await openai.chat.completions.create({
-                model: 'gpt-3.5-turbo',
-                messages: [{"role":'user',"content":narrative}],
-                max_tokens: 150,
-            });
+    // Render the current step of the quiz
+    let stepData = null;
+    if (currentStep && quizSteps[currentStep]) {
+        stepData = quizSteps[currentStep];
+    }
+    res.redirect('/quiz'); // Redirect to the next question
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('An error occurred');
+    }
+};
 
-            req.session.quizData.aiResponse = response.choices[0].message.content;
-            
-            res.redirect('/quiz');
-        } catch (err) {
-            console.log(err);
-            res.status(500).send('An error occurred');
-        }
-    },
+
+// Function to generate the AI narrative based on the user's quiz responses
+export const quizAiPrompt = async (req, res) => {
+    try {
+        const { selectedAnswers } = req.session.quizData; // Destructure to get selectedAnswers from session data
+        let narrative = `Imagine we're sitting down for a heart-to-heart, just two friends chatting about life's ups and downs. Respond with this tone in mind and try to match my tone. Keep your response brief because I plan to do my own research on the therapy type you end up selecting. Here's a bit about what's been on my mind lately: When things get tough, to navigate through the rough patches ${selectedAnswers[0]} What really pulled me toward considering therapy is that ${selectedAnswers[1]} My ultimate goal, or what I'm really hoping to get out of this, is that ${selectedAnswers[2]} Dealing with unexpected challenges, I've found that ${selectedAnswers[3]} Personal growth is huge for me and, when it comes to evolving into who I'm meant to be, what matters most is ${selectedAnswers[4]} In those really tight spots, the ones that test you, for support ${selectedAnswers[5]} Opening up can be tough, Opening up can be tough, but when I do, the vibes are essentially: ${selectedAnswers[6]} Change? Well, ${selectedAnswers[7]} If I could dream up the perfect outcome from therapy, it would be ${selectedAnswers[8]} And how do I know when I've truly had a good day? It's ${selectedAnswers[9]} Based on everything I've shared, keeping it all the way real, which of these therapy types—CBT, Psychodynamic, Humanistic, DBT, or Family Therapy—do you think would vibe best with me?`;
+
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: [{"role":'user',"content":narrative}],
+            max_tokens: 150,
+        });
+
+        req.session.quizData.aiResponse = response.choices[0].message.content;
+        
+        res.redirect('/quiz');
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('An error occurred');
+    }
 };
