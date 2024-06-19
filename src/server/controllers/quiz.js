@@ -1,4 +1,4 @@
-import openai from ("../config/openaiclient");
+import openai from ("../config/openaiclient.js");
 
 
 const quizSteps = {
