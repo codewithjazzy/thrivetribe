@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getTherapistPortal } from "../controllers/profile";
+import { getTherapistPortal } from "../controllers/profile.js";
 
 const router = Router();
 

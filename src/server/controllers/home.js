@@ -1,4 +1,4 @@
-import Profile from "../models/Profile";
+import Profile from "../models/Profile.js";
 
 // Define each function as a named export
 export const getIndex = (req, res) => {

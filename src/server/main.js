@@ -1,16 +1,15 @@
 import express from "express";
 const app = express();
 import ViteExpress from "vite-express";
-import "dotenv/config"
+import "dotenv/config";
 import mongoose from "mongoose";
-import openai from "./config/openaiclient"
-import connectDB from "./config/database";
-import session from "express-session"
+import connectDB from "./config/database.js";
+import session from "express-session";
 import MongoStore from "connect-mongo";
 import morgan from "morgan";
-import mainRoutes from "./routes/main";
-import quizRoutes from "./routes/quiz";
-import profileRoutes from "./routes/profile";
+import mainRoutes from "./routes/main.js";
+import quizRoutes from "./routes/quiz.js";
+import profileRoutes from "./routes/profile.js";
 
 
 connectDB();
@@ -27,9 +26,9 @@ app.use(
 );
 
 //Setup Routes For Which The Server Is Listening
-app.use("/", mainRoutes);
-app.use("/quiz", quizRoutes);
-app.use("/profile", profileRoutes);
+app.use("/api", mainRoutes);
+app.use("/api/quiz", quizRoutes);
+app.use("/api/profile", profileRoutes);
 
 
 app.get("/hello", (req, res) => {
