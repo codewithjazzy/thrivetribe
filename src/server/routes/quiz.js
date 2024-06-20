@@ -3,7 +3,7 @@ import {
     getQuiz,
     handleQuizStep,
     quizAiPrompt,
-} from "../controllers/quiz";
+} from "../controllers/quiz.js";
 
 const router = Router();
 

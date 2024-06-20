@@ -8,7 +8,7 @@ import {
     getTherapistPortal,
     getTherapistFinder,
     getTherapistProfile
-} from "../controllers/home";
+} from "../controllers/home.js";
 
 const router = Router();
 

@@ -1,8 +1,8 @@
-import Location from '../models/Location.js';
-import Expertise from '../models/Expertise.js';
-import Treatment from '../models/Treatment.js';
-import Language from '../models/Language.js';
-import Dialect from '../models/Dialect.js';
+import Location from "../models/Location.js";
+import Expertise from "../models/Expertise.js";
+import Treatment from "../models/Treatment.js";
+import Language from "../models/Language.js";
+import Dialect from "../models/Dialect.js";
 
 
 export const getTherapistPortal = async (req, res) => {
