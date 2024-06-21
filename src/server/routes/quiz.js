@@ -8,8 +8,8 @@ import {
 const router = Router();
 
 router.get("/", getQuiz);
-router.post("/handleQuizStep", handleQuizStep); 
-router.post("/AIresults", quizAiPrompt);
+router.post("/progress", handleQuizStep); 
+router.post("/results", quizAiPrompt);
 
 
 export default router;

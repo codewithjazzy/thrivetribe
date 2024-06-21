@@ -9,7 +9,7 @@ import MongoStore from "connect-mongo";
 import morgan from "morgan";
 import mainRoutes from "./routes/main.js";
 import quizRoutes from "./routes/quiz.js";
-import profileRoutes from "./routes/profile.js";
+import signupRoutes from "./routes/signup.js";
 
 
 connectDB();
@@ -28,7 +28,7 @@ app.use(
 //Setup Routes For Which The Server Is Listening
 app.use("/api", mainRoutes);
 app.use("/api/quiz", quizRoutes);
-app.use("/api/profile", profileRoutes);
+app.use("/api/signup", signupRoutes);
 
 
 app.get("/hello", (req, res) => {
