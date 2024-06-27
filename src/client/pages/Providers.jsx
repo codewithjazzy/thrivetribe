@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom";
 
-export default function Finder(){
+export default function Providers(){
    const [allProfiles, setAllProfiles] = useState([])
 
    useEffect(() => {
@@ -45,7 +46,12 @@ export default function Finder(){
                                     <p>{profile.bio}</p>
                                 </div>
                                 <div>
-                                    <a href={`/profile/${profile._id}`}>View Full Profile</a>
+                                    <Link 
+                                        to={`/profile/${profile._id}`}
+                                        state={{ therapist: profile }}
+                                    >
+                                        View Full Profile
+                                    </Link>
                                 </div>
                             </section>
                         </div>
