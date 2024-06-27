@@ -1,3 +1,5 @@
+
+
 export default function Types(){
     return (
         <main className="">

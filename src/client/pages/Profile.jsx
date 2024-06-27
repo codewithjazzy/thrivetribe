@@ -1,14 +1,15 @@
-import { useState } from "react"
+import { useLocation } from "react-router-dom"
 
 
 export default function Profile() {
-    const [therapist] = useState()
+    const { state } = useLocation();
+    const therapist = state.therapist
 
     return (
         <main>
             <section>
                 <img
-                    src="therapist.image.replace('/upload/', '/upload/w_300,h_300,c_fill/')" alt={`${therapist.firstName}'s profile picture`}
+                    src={therapist.image.replace('/upload/', '/upload/w_200,h_200,c_fill/')}
                 />
                 <h2>{therapist.firstName} {therapist.lastName}, {therapist.title}</h2>
                 <span>{therapist.location.state}</span>
@@ -34,25 +35,25 @@ export default function Profile() {
             <section>
                 <h3>Specialties and Expertise</h3>
                 {therapist.expertise.map(skill => (
-                    <li>{skill.expertise}</li>
+                    <li key={skill._id}>{skill.expertise}</li>
                 ))}
             </section>
             <section>
                 <h3>Treatment Approaches</h3>
                 {therapist.treatments.map(treat => (
-                    <li>{treat.treatment}</li>
+                    <li key={treat._id}>{treat.treatment}</li>
                 ))}
             </section>
             <section>
                 <h3>Spoken Languages</h3>
                 {therapist.languages.map(language => (
-                    <li>{language.language}</li>
+                    <li key={language._id}>{language.language}</li>
                 ))}
             </section>
             <section>
                 <h3>Spoken Dialects</h3>
                 {therapist.dialects.map(dialect => (
-                    <li>{dialect.dialect}</li>
+                    <li key={dialect._id}>{dialect.dialect}</li>
                 ))}
             </section>
         </main>
