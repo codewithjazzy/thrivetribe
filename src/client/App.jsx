@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Starter from "./pages/Starter";
 import Types from "./pages/Types";
+import Quiz from "./pages/Quiz";
 import Layout from "./Layout";
 import {
     BrowserRouter as Router,
@@ -27,6 +28,7 @@ function App() {
           <Route path="/profile/:id" element={<Profile/>}/>
           <Route path="/therapy101" element={<Starter/>}/>
           <Route path="/types" element={<Types/>}/>
+          <Route path="/quiz" element={<Quiz/>}/>
         </Route>
       </Routes>
     </Router>
