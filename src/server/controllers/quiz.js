@@ -142,7 +142,7 @@ export const getQuiz = (req, res) => {
     }
 
     const { quizData } = req.session;
-    const { currentStep, aiResponse } = quizData;
+    let { currentStep, aiResponse } = quizData;
 
     let stepData = null;
     if (currentStep) {
@@ -168,7 +168,7 @@ export const handleQuizStep = async (req, res) => {
     try {
         if (!req.session.quizData) {
             req.session.quizData = {
-                currentStep: "",
+                currentStep: null,
                 selectedAnswers: [],
                 aiResponse: null
             };
@@ -177,31 +177,39 @@ export const handleQuizStep = async (req, res) => {
         const { quizData } = req.session
         let { currentStep, selectedAnswers } = quizData;
 
-   
         if (req.body.action === "takeQuiz") {
-            req.session.quizData = { currentStep: "start", selectedAnswers: [] };
-            return res.json({ message: "Quiz started", quizData: req.session.quizData })
-        } else if (req.body.action === "start" || req.body.action === "restart") {
-            req.session.quizData = { currentStep: "1", selectedAnswers: [] };
-            delete req.session.quizData.aiResponse; 
-            return res.json({ message: "Quiz restarted", quizData: req.session.quizData });
-        } else if (req.body.action === "results") {
-            console.log("Selected Answers:", selectedAnswers);
-            return res.json({ message: "Proceed to results", quizData: req.session.quizData });
-        }
-
-        if (req.body.userInput) {
+            req.session.quizData = { currentStep: "start", selectedAnswers: [], aiResponse: null };
+        } else if (req.body.action === "start") {
+            req.session.quizData = { currentStep: "1", selectedAnswers: [], aiResponse: null };
+            delete req.session.quizData.aiResponse;
+        } else if (req.body.action === "restart") {
+            req.session.quizData = { currentStep: "start", selectedAnswers: [], aiResponse: null };
+            delete req.session.quizData.aiResponse;
+        }else if (req.body.userInput) {
             selectedAnswers.push(req.body.userInput);
             const nextStep = quizSteps[currentStep].nextStep;
             req.session.quizData.currentStep = nextStep;
         }
 
+        currentStep = req.session.quizData.currentStep;
         let stepData = null;
         if (currentStep && quizSteps[currentStep]) {
             stepData = quizSteps[currentStep];
         }
 
-        res.json({ message: "Next question", stepData, quizData: req.session.quizData })
+        const isStartStep = currentStep === "start";
+        const isEndStep = currentStep === "end";
+
+        const response = {
+            stepData,
+            isStartStep,
+            isEndStep,
+            aiResponse: req.session.quizData.aiResponse,
+            currentStep: req.session.quizData.currentStep,
+        };
+
+
+        res.json({ message: "Next question", ...response })
     } catch (err) {
         console.error(err);
         res.status(500).send('An error occurred');
