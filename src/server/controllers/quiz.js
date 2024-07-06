@@ -177,7 +177,6 @@ export const handleQuizStep = async (req, res) => {
         const { quizData } = req.session
         let { currentStep, selectedAnswers } = quizData;
 
-   
         if (req.body.action === "takeQuiz") {
             req.session.quizData = { currentStep: "start", selectedAnswers: [], aiResponse: null };
         } else if (req.body.action === "start") {
