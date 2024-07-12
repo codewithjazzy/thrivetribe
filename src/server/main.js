@@ -2,14 +2,14 @@ import express from "express";
 const app = express();
 import ViteExpress from "vite-express";
 import "dotenv/config";
-import mongoose from "mongoose";
 import connectDB from "./config/database.js";
 import session from "express-session";
+import passport from "passport";
 import MongoStore from "connect-mongo";
 import morgan from "morgan";
 import mainRoutes from "./routes/main.js";
 import quizRoutes from "./routes/quiz.js";
-import signupRoutes from "./routes/signup.js";
+import memberRoutes from "./routes/members.js";
 
 
 connectDB();
@@ -25,16 +25,16 @@ app.use(
   })
 );
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Setup Routes For Which The Server Is Listening
 app.use("/api", mainRoutes);
 app.use("/api/quiz", quizRoutes);
-app.use("/api/signup", signupRoutes);
+app.use("/api/member", memberRoutes);
 
 
-app.get("/hello", (req, res) => {
-  res.send("Hello Vite + React!");
-});
 
-ViteExpress.listen(app, 3000, () =>
+ViteExpress.listen(app, process.env.PORT, () =>
   console.log("Server is listening on port 3000..."),
 );

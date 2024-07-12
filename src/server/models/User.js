@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-//const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt"
 
-const UserSchema = new mongoose.Schema({
+
+const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   googleId: {
@@ -13,7 +14,7 @@ const UserSchema = new mongoose.Schema({
 
 // Password hash middleware.
 
-UserSchema.pre("save", function save(next) {
+userSchema.pre("save", function save(next) {
   const user = this;
   if (!user.isModified("password")) {
     return next();
@@ -34,7 +35,7 @@ UserSchema.pre("save", function save(next) {
 
 // Helper method for validating user's password.
 
-UserSchema.methods.comparePassword = function comparePassword(
+userSchema.methods.comparePassword = function comparePassword(
   candidatePassword,
   cb
 ) {
@@ -43,6 +44,6 @@ UserSchema.methods.comparePassword = function comparePassword(
   });
 };
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User
