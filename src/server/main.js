@@ -27,6 +27,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport.js')(passport);
 
 //Setup Routes For Which The Server Is Listening
 app.use("/api", mainRoutes);
