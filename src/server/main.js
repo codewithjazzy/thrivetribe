@@ -9,7 +9,7 @@ import MongoStore from "connect-mongo";
 import morgan from "morgan";
 import mainRoutes from "./routes/main.js";
 import quizRoutes from "./routes/quiz.js";
-import memberRoutes from "./routes/members.js";
+import memberRoutes from "./routes/member.js";
 
 
 connectDB();

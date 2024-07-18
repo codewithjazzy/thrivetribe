@@ -212,7 +212,7 @@ export const handleQuizStep = async (req, res) => {
         res.json({ message: "Next question", ...response })
     } catch (err) {
         console.error(err);
-        res.status(500).send('An error occurred');
+        res.status(500).json({ message: 'An error occurred' });
     }
 };
 
@@ -234,6 +234,6 @@ export const quizAiPrompt = async (req, res) => {
         res.json({ message: "Quiz results", aiResponse });
     } catch (err) {
         console.log(err);
-        res.status(500).send('An error occurred');
+        res.status(500).json({ message: 'An error occurred' });
     }
 };

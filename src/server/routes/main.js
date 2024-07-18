@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
     getTherapistFinder,
     getTherapistProfile
-} from "../controllers/home.js";
+} from "../controllers/profile";
 
 const router = Router();
 

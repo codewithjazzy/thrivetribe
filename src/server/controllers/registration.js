@@ -5,7 +5,7 @@ import Language from "../models/Language.js";
 import Dialect from "../models/Dialect.js";
 
 
-export const getTherapistSignup = async (req, res) => {
+export const therapistRegistration = async (req, res) => {
     try {
         const expertise = await Expertise.find();
         const treatments = await Treatment.find();
@@ -22,6 +22,6 @@ export const getTherapistSignup = async (req, res) => {
         res.json({ message: "Therapist signup", response })
     } catch (error) {
         console.error('Error loading therapist signup page:', error);
-        res.status(500).send('An error occurred while loading the signup page.');
+        res.status(500).json({ message: 'An error occurred while loading the signup page.' });
     }
 };
