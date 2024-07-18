@@ -7,7 +7,7 @@ export const getTherapistFinder = async (req, res) => {
         res.json({ message: "Finding Therapists", profiles });
     } catch (error) {
         console.error("Error fetching therapist profiles:", error);
-        res.status(500).send('An error occurred while fetching therapist profiles.');
+        res.status(500).json({ message: 'An error occurred while fetching therapist profiles.' });
     }
 };
 
@@ -19,6 +19,7 @@ export const getTherapistProfile = async (req, res) => {
         res.json({ message: "Loading provider profile", therapist });
     } catch (error) {
         console.error('Error fetching therapist details:', error);
-        res.status(500).send('An error occurred while fetching provider profile.');
+        res.status(500).json({ message: 'An error occurred while fetching provider profile.' });
     }
 };
+

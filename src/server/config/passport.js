@@ -1,6 +1,6 @@
-import { Strategy as LocalStrategy } from 'passport-local';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import User from '../models/User'
+import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import User from "../models/User"
 
 
 export const configurePassport = (passport) => {
@@ -46,10 +46,14 @@ export const configurePassport = (passport) => {
         async (accessToken, refreshToken, profile, done) => {
             // console.log(profile);
             try {
-              const oldUser = await User.findOne({ email: profile.email });
+              const existingUser = await User.findOne({ email: profile.emails[0].value });
         
-              if (oldUser) {
-                return done(null, oldUser);
+              if (existingUser) {
+                if (!existingUser.googleId){
+                  existingUser.googleId = profile.id;
+                  await existingUser.save();
+                }
+                return done(null, existingUser);
               }
             } catch (err) {
               console.log(err);
