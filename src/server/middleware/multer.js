@@ -1,7 +1,7 @@
 import multer from "multer";
 import path from "path";
 
-const uploadMulter =  multer({
+const upload =  multer({
     storage: multer.diskStorage({}),
     fileFilter: (req, file, cb) => {
       let ext = path.extname(file.originalname);
@@ -13,4 +13,4 @@ const uploadMulter =  multer({
     },
   });
 
-export default uploadMulter;
+export default upload;
