@@ -5,7 +5,7 @@ import Expertise from "../models/Expertise.js";
 import Treatment from "../models/Treatment.js";
 import Language from "../models/Language.js";
 import Dialect from "../models/Dialect.js";
-import { profile } from "console";
+
 
 
 export const getRegistration = async (req, res) => {
