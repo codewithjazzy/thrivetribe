@@ -10,6 +10,7 @@ export const googleAuth = passport.authenticate('google', {
     scope: ['profile', 'email']
 });
 
+
 export const googleAuthCallback = (req, res, next) => {
     passport.authenticate('google', (err, user, info) => {
       if (err) {
@@ -56,6 +57,7 @@ const validateInput = (email, password, confirmPassword, type) => {
     return errors;
 };
 
+
 export const login = async (req, res, next) => {
     const validationErrors = validateInput(req.body.email, req.body.password, null, 'login');
   
@@ -82,6 +84,7 @@ export const login = async (req, res, next) => {
       });
     })(req, res, next);
   };
+
 
 export const signup = async (req, res, next) => {
     const validationErrors = validateInput(req.body.email, req.body.password, req.body.confirmPassword, 'signup');
@@ -120,6 +123,7 @@ export const signup = async (req, res, next) => {
     }
 };
 
+
 export const logout = (req, res) => {
     req.logout((err) => {
       if (err) {
@@ -133,4 +137,4 @@ export const logout = (req, res) => {
         res.status(200).json({ message: 'Successfully logged out.' });
       });
     });
-  };
+};
