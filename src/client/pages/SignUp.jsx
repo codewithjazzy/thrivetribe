@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import LabeledForm from "../components/LabeledForm";
 
-export default function Login(){
+export default function SignUp(){
     const navigate = useNavigate();
 
 
-    const handleGoogleLogin = () => {
+    const handleGoogleSignup = () => {
         window.location.href = "/auth/google";
     }
 
@@ -15,34 +15,36 @@ export default function Login(){
 
         const email = event.target.email.value;
         const password = event.target.password.value;
+        const confirmPassword = event.target.confirmPassword.value;
 
-        const response = await fetch("/login", {
+        const response = await fetch("/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password, confirmPassword })
         });
 
         if (response.ok) {
-            navigate("/member")
+            navigate("/register")
         } else {
-            console.log("Login failed");
+            console.log("Signup failed");
         }
     };
 
 
     return (
         <div>
-            <h2>Login</h2>
+            <h2>Signup</h2>
             <form onSubmit={handleSubmit}>
                 <LabeledForm type="email" id="emailInput" name="email" label="Email" required/>
                 <LabeledForm type="password" id="passwordInput" name="password" label="Password" required/>
+                <LabeledForm type="confirmPassword" id="confirmPassword" name="confirmPassword" label="Confirm Password" required/>
                 
-                <button type="submit">Login</button>
+                <button type="submit">Create Account</button>
             </form>
 
-            <button onClick={handleGoogleLogin}>Sign in with Google</button>
+            <button onClick={handleGoogleSignup}>Signup with Google</button>
         </div>
     );
 }

@@ -25,6 +25,9 @@ export default function Navbar() {
             <Link to="/quiz">
                 <button>Take The Quiz</button>            
             </Link>
+            <Link to="/portal">
+                <button>Therapist Portal</button>            
+            </Link>
         </>
     )
 }

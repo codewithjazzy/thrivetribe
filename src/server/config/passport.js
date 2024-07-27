@@ -1,6 +1,6 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import User from "../models/User"
+import User from "../models/User.js"
 
 
 export const configurePassport = (passport) => {
