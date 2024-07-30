@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import LabeledForm from "../components/LabeledForm";
+import FormInput from "../components/Forms";
 
 export default function Login(){
     const navigate = useNavigate();
@@ -36,8 +36,8 @@ export default function Login(){
         <div>
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
-                <LabeledForm type="email" id="emailInput" name="email" label="Email" required/>
-                <LabeledForm type="password" id="passwordInput" name="password" label="Password" required/>
+                <FormInput type="email" id="emailInput" name="email" label="Email" required/>
+                <FormInput type="password" id="passwordInput" name="password" label="Password" required/>
                 
                 <button type="submit">Login</button>
             </form>
