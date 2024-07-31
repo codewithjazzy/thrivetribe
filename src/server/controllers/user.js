@@ -18,6 +18,15 @@ export const editProfile = async (req, res) => {
         const memberId = req.params.id;
         const updateData = {};
 
+        if (req.file) {
+            await cloudinary.uploader.destroy(Profile.cloudinaryId);
+
+            const result = await cloudinary.uploader.upload(req.file.path);
+
+            updateData.image = result.secure_url;
+            updateData.cloudinaryId = result.public_id;
+        }
+
         //only update fields that exist in the request
         if (req.body.firstName) {
             updateData.firstName = req.body.firstName
