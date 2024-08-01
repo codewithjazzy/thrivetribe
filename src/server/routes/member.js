@@ -12,7 +12,7 @@ const router = Router();
 router.get("/createAccount", getRegistration);
 router.post("/createAccount", upload.single("file"), postRegistration);
 router.get("/account", ensureAuth, getAccount);
-router.put("/editAccount", ensureAuth, editAccount)
+router.put("/editAccount", upload.single("file"), editAccount)
 
 
 export default router;
