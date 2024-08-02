@@ -1,4 +1,5 @@
 import Profile from "../models/Profile.js";
+import cloudinary from "../middleware/cloudinary.js" ;
 
 export const getAccount = async (req, res) => {
     try {
@@ -44,7 +45,6 @@ export const editAccount = async (req, res) => {
         if (req.body.location) updateData.location = req.body.location;
 
         console.log('Update Data:', updateData);
-
 
 
         //update Profile in DB
