@@ -24,9 +24,9 @@ export const googleAuthCallback = (req, res, next) => {
           return next(err);
         }
         if (user.needsProfileCompletion) {
-          return res.redirect('/register'); // Redirect to register if profile completion is needed
+          return res.redirect('/createAccount'); // Redirect to register if profile completion is needed
         }
-        return res.redirect('/member'); // Redirect to member on success
+        return res.redirect('/account'); // Redirect to member on success
       });
     })(req, res, next);
   };
@@ -80,7 +80,7 @@ export const login = async (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.status(200).json({ message: "Success! You are logged in." });
+        res.status(200).json({ message: "Success! You are logged in.", user });
       });
     })(req, res, next);
   };

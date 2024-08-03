@@ -1,10 +1,10 @@
 import User from "../models/User.js";
 import Profile from "../models/Profile.js";
 
-export const memberProfile = async (req, res) => {
+export const getAccount = async (req, res) => {
     try {
         const memberId = req.user.id;
-        const member = await Profile.find({ user: memberId})
+        const member = await Profile.findOne({ user: memberId})
             .populate(['location', 'expertise', 'treatments', 'languages', 'dialects']);
         res.json({ message: "Loading member profile", member });
     } catch (error) {
@@ -13,7 +13,7 @@ export const memberProfile = async (req, res) => {
     }
 };
 
-export const editProfile = async (req, res) => {
+export const editAccount = async (req, res) => {
     try {
         const memberId = req.params.id;
         const updateData = {};

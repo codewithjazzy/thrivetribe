@@ -44,29 +44,35 @@ export const configurePassport = (passport) => {
             state: true, 
         },
         async (accessToken, refreshToken, profile, done) => {
-            // console.log(profile);
             try {
-              const existingUser = await User.findOne({ email: profile.emails[0].value });
-        
-              if (existingUser) {
-                if (!existingUser.googleId){
-                  existingUser.googleId = profile.id;
-                  await existingUser.save();
-                }
-                return done(null, existingUser);
+                //check if email exists
+              if (!profile.emails || !profile.emails.length){
+                return done(new Error("No email associated with this account"), null);
               }
-            } catch (err) {
-              console.log(err);
-            }
+
+              const email = profile.emails[0].value;
+
+              const existingUser = await User.findOne({ email });
         
-            try {
+
+              if (existingUser) {
+                  // If the user exists but doesn't have a Google ID, update it
+                  if (!existingUser.googleId){
+                    existingUser.googleId = profile.id;
+                    await existingUser.save();
+                  }
+                  return done(null, existingUser);
+              }
+                         
+                // If the user does not exist, create a new user
               const newUser = await new User({
-                googleId: profile.id,
-                email: profile.email,
+                  googleId: profile.id,
+                  email: email,
               }).save();
               done(null, newUser);
             } catch (err) {
               console.log(err);
+              done(err, null);
             }
           },
         )

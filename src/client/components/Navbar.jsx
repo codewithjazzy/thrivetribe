@@ -1,7 +1,18 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 
 
 export default function Navbar() {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleLogout = async () => {
+        await fetch("/logout");
+        navigate("/login")
+    }
+
+    //conditionally show logout button on these paths
+    const showLogout = ["/account", "/createAccount", "/editAccount"].includes(location.pathname);
+
     return (
         <>
             <Link to="/">
@@ -28,6 +39,9 @@ export default function Navbar() {
             <Link to="/portal">
                 <button>Therapist Portal</button>            
             </Link>
+            {showLogout && (
+                <button onClick={handleLogout}>Logout</button>
+            )}
         </>
     )
 }

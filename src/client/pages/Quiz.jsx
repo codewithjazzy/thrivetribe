@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from '../config/api';
 
 
 export default function Quiz() {
@@ -7,8 +8,8 @@ export default function Quiz() {
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
-                const res = await fetch("http://localhost:3000/api/quiz");
-                const data = await res.json();
+                const response = await fetch(`${API_URL}/api/quiz`);
+                const data = await response.json();
                 console.log(data)
                 setQuizData(data);
             } catch (error) {
@@ -26,14 +27,14 @@ export default function Quiz() {
         console.log("Button Clicked", action, userInput)
 
         try {
-            const res = await fetch(url, {
+            const response = await fetch(url, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)
             });
 
             if (res.ok) {
-                const data = await res.json();
+                const data = await response.json();
                 console.log("Data Received", data)
                 setQuizData(data)
             }

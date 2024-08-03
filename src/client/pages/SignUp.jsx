@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import FormInput from "../components/Forms";
+import { FormInput } from "../components/Forms";
 
 export default function SignUp(){
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function SignUp(){
         });
 
         if (response.ok) {
-            navigate("/register")
+            navigate("/createAccount")
         } else {
             console.log("Signup failed");
         }

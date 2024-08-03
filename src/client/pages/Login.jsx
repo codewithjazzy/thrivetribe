@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import FormInput from "../components/Forms";
+import { FormInput } from "../components/Forms";
 
 export default function Login(){
     const navigate = useNavigate();
@@ -25,7 +25,12 @@ export default function Login(){
         });
 
         if (response.ok) {
-            navigate("/member")
+            const data = await response.json();
+            if (data.user.needsProfileCompletion) {
+                navigate("/createAccount")
+            } else {
+                navigate("/account")
+            }
         } else {
             console.log("Login failed");
         }

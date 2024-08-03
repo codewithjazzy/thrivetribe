@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FormInput, FormTextarea } from "../components/Forms";
+import { API_URL } from '../config/api';
 
 export default function ProfileForm({ initialData = {}, onSubmit }) {
+  const navigate = useNavigate();
+
   const [formFields, setFormFields] = useState({
     expertise: [],
     treatments: [],
@@ -18,8 +22,8 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
   useEffect(() => {
     const fetchRegistration = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/member/register");
-        const data = await res.json();
+        const response = await fetch(`${API_URL}/api/member/createAccount`);
+        const data = await response.json();
         setFormFields(data.response);
       } catch (error) {
         console.error('error', error);
@@ -49,7 +53,8 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
     selectedTreatments.forEach(id => formData.append('treatments', id));
     selectedDialects.forEach(id => formData.append('dialects', id));
 
-    onSubmit(formData);
+    await onSubmit(formData);
+    navigate("/account")
   };
 
   return (

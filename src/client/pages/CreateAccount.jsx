@@ -1,8 +1,10 @@
 import ProfileForm from '../components/ProfileForm';
+import { API_URL } from '../config/api';
 
-export default function CreateProfile() {
+
+export default function CreateAccount() {
   const handleRegistrationSubmit = async (formData) => {
-    const response = await fetch("http://localhost:3000/api/member/register", {
+    const response = await fetch(`${API_URL}/api/member/createAccount`, {
       method: "POST",
       body: formData,
     });

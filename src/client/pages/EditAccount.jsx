@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
 import ProfileForm from "../components/ProfileForm";
+import { API_URL } from '../config/api';
 
 
-export default function EditProfile() {
+export default function EditAccount() {
     const [initialData, setInitialData] = useState(null);
 
     useEffect(() => {
         const fetchProfile = async () => {
-            const response = await fetch("http://localhost:3000/api/member/profile");
-            const data = await response.json();
-            setInitialData(data.member);
+            try {
+                const response = await fetch(`${API_URL}/api/member/account`);
+                const data = await response.json();
+                console.log('Fetched member data', data.member)
+                setInitialData(data.member);
+            } catch (error) {
+            console.error('Error fetching profile data', error)
+            }
         };
 
         fetchProfile();
     }, []);
 
+
     const handleEditSubmit = async (formData) => {
-        const response = await fetch("http://localhost:3000/api/member/editProfile", {
+        const response = await fetch(`${API_URL}/api/member/editAccount`, {
             method: "PUT",
             body: formData,
         });
