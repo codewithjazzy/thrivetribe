@@ -19,7 +19,7 @@ export default function ProfileForm({ initialData = {}, formFields = {}, onSubmi
       setSelectedTreatments(initialData.treatments.map(item => item._id) || []);
       setSelectedLanguages(initialData.languages.map(item => item._id) || []);
       setSelectedDialects(initialData.dialects.map(item => item._id) || []);
-      setSelectedLocation(initialData.location || '');
+      setSelectedLocation(initialData.location._id || '');
     }
   }, [initialData]);
 
@@ -44,17 +44,13 @@ export default function ProfileForm({ initialData = {}, formFields = {}, onSubmi
 
     const formData = new FormData(event.target);
 
+
      // Append arrays directly
      selectedExpertise.forEach(id => formData.append('expertise', id));
      selectedTreatments.forEach(id => formData.append('treatments', id));
      selectedLanguages.forEach(id => formData.append('languages', id));
      selectedDialects.forEach(id => formData.append('dialects', id));
-
-
-          // Log formData before sending
-          for (let pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-           }
+     formData.append('location', selectedLocation);
 
 
     await onSubmit(formData, {
@@ -78,7 +74,7 @@ export default function ProfileForm({ initialData = {}, formFields = {}, onSubmi
       <FormInput type="url" id="website" name="website" label="Website:" defaultValue={initialData.website} />
 
       <label htmlFor="location">Location</label>
-      <select id="location" name="location" value={initialData.location?._id} onChange={handleLocationChange}>
+      <select id="location" name="location" value={selectedLocation} onChange={handleLocationChange}>
         <option value="">Select your location</option>
         {formFields.locations.map(location => (
           <option key={location._id} value={location._id}>

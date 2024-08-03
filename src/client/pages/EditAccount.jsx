@@ -46,9 +46,6 @@ export default function EditAccount() {
         const response = await fetch(`${API_URL}/api/member/editAccount`, {
             method: "PUT",
             body: formData,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-              }
         });
     
         const result = await response.json();
