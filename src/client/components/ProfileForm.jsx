@@ -57,7 +57,12 @@ export default function ProfileForm({ initialData = {}, formFields = {}, onSubmi
            }
 
 
-    await onSubmit(formData);
+    await onSubmit(formData, {
+      selectedExpertise,
+      selectedTreatments,
+      selectedLanguages,
+      selectedDialects
+  });
     navigate("/account");
 };
 
