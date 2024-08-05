@@ -28,7 +28,6 @@ export default function Account(){
            try {
                 const response = await fetch(`${API_URL}/api/member/account`);
                 const data = await response.json();
-                console.log(data.member)
                 setMember(data.member);
            } catch (error) {
                 console.error('error', error)
@@ -38,7 +37,7 @@ export default function Account(){
         fetchMember();
     }, []);
 
-    console.log('Treatments', member.treatments)
+    //console.log('Treatments', member.treatments)
 
     return (
         <main>

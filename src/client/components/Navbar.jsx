@@ -21,12 +21,6 @@ export default function Navbar() {
             <Link to="/about">
                 <button>About</button>            
             </Link>
-            <Link to="/blog">
-                <button>Blog</button>            
-            </Link>
-            <Link to="/providers">
-                <button>Find A Therapist</button>            
-            </Link>
             <Link to="/therapy101">
                 <button>Therapy 101</button>            
             </Link>
@@ -35,6 +29,12 @@ export default function Navbar() {
             </Link>
             <Link to="/quiz">
                 <button>Take The Quiz</button>            
+            </Link>
+            <Link to="/providers">
+                <button>Find A Therapist</button>            
+            </Link>
+            <Link to="/blog">
+                <button>Blog</button>            
             </Link>
             <Link to="/portal">
                 <button>Therapist Portal</button>            

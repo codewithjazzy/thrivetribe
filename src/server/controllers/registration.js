@@ -46,10 +46,10 @@ export const postRegistration = async (req, res) => {
             email: req.body.email,
             phone: req.body.phone,
             website: req.body.website,
-            expertise: req.body.expertise,
-            treatments: req.body.treatments,
-            languages: req.body.languages,
-            dialects: req.body.dialects,
+            expertise: Array.from(new Set(req.body.expertise || [])),
+            treatments: Array.from(new Set(req.body.treatments || [])),
+            languages: Array.from(new Set(req.body.languages || [])),
+            dialects: Array.from(new Set(req.body.dialects || [])),
             location: req.body.location,
             user: req.user.id,
         });
@@ -63,6 +63,6 @@ export const postRegistration = async (req, res) => {
         res.status(201).json({ message: "Profile created successfully", profile: newProfile, user: updateProfileCompletion });
     } catch (error) {
         console.error("Error creating profile", error);
-        res.status(500).json({ message: "An error occured while creating profile" })
+        res.status(500).json({ message: "An error occurred while creating profile" })
     }
 }

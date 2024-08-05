@@ -1,37 +1,28 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormInput, FormTextarea } from "../components/Forms";
-import { API_URL } from '../config/api';
 
-export default function ProfileForm({ initialData = {}, onSubmit }) {
+
+export default function ProfileForm({ initialData = {}, formFields = {}, onSubmit }) {
   const navigate = useNavigate();
 
-  const [formFields, setFormFields] = useState({
-    expertise: [],
-    treatments: [],
-    languages: [],
-    dialects: [],
-    locations: [],
-  });
+  const [selectedExpertise, setSelectedExpertise] = useState([]);
+  const [selectedTreatments, setSelectedTreatments] = useState([]);
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
+  const [selectedDialects, setSelectedDialects] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(initialData.location || '');
 
-  const [selectedExpertise, setSelectedExpertise] = useState(initialData.expertise || []);
-  const [selectedTreatments, setSelectedTreatments] = useState(initialData.treatments || []);
-  const [selectedLanguages, setSelectedLanguages] = useState(initialData.languages || []);
-  const [selectedDialects, setSelectedDialects] = useState(initialData.dialects || []);
 
   useEffect(() => {
-    const fetchRegistration = async () => {
-      try {
-        const response = await fetch(`${API_URL}/api/member/createAccount`);
-        const data = await response.json();
-        setFormFields(data.response);
-      } catch (error) {
-        console.error('error', error);
-      }
-    };
+    if (initialData) {
+      setSelectedExpertise(initialData.expertise.map(item => item._id) || []);
+      setSelectedTreatments(initialData.treatments.map(item => item._id) || []);
+      setSelectedLanguages(initialData.languages.map(item => item._id) || []);
+      setSelectedDialects(initialData.dialects.map(item => item._id) || []);
+      setSelectedLocation(initialData.location || '');
+    }
+  }, [initialData]);
 
-    fetchRegistration();
-  }, []);
 
   const handleCheckbox = (event, setSelectedItems, selectedItems) => {
     const { value, checked } = event.target;
@@ -42,20 +33,34 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
     }
   };
 
+
+  const handleLocationChange = (event) => {
+    setSelectedLocation(event.target.value);
+  };
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
 
-    // Append arrays
-    selectedExpertise.forEach(id => formData.append('expertise', id));
-    selectedLanguages.forEach(id => formData.append('languages', id));
-    selectedTreatments.forEach(id => formData.append('treatments', id));
-    selectedDialects.forEach(id => formData.append('dialects', id));
+     // Append arrays directly
+     selectedExpertise.forEach(id => formData.append('expertise', id));
+     selectedTreatments.forEach(id => formData.append('treatments', id));
+     selectedLanguages.forEach(id => formData.append('languages', id));
+     selectedDialects.forEach(id => formData.append('dialects', id));
+
+
+          // Log formData before sending
+          for (let pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+           }
+
 
     await onSubmit(formData);
-    navigate("/account")
-  };
+    navigate("/account");
+};
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -66,8 +71,9 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
       <FormInput type="tel" id="phone" name="phone" label="Phone Number:" defaultValue={initialData.phone} />
       <FormInput type="email" id="email" name="email" label="Email:" defaultValue={initialData.email} />
       <FormInput type="url" id="website" name="website" label="Website:" defaultValue={initialData.website} />
+
       <label htmlFor="location">Location</label>
-      <select id="location" name="location" defaultValue={initialData.location}>
+      <select id="location" name="location" value={initialData.location?._id} onChange={handleLocationChange}>
         <option value="">Select your location</option>
         {formFields.locations.map(location => (
           <option key={location._id} value={location._id}>
@@ -87,7 +93,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
               name="expertise"
               value={expert._id}
               onChange={e => handleCheckbox(e, setSelectedExpertise, selectedExpertise)}
-              defaultChecked={selectedExpertise.includes(expert._id)}
+              checked={selectedExpertise.includes(expert._id)}
             />
             {expert.expertise}
           </label>
@@ -102,7 +108,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
               name="treatments"
               value={treatment._id}
               onChange={e => handleCheckbox(e, setSelectedTreatments, selectedTreatments)}
-              defaultChecked={selectedTreatments.includes(treatment._id)}
+              checked={selectedTreatments.includes(treatment._id)}
             />
             {treatment.treatment}
           </label>
@@ -117,7 +123,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
               name="languages"
               value={language._id}
               onChange={e => handleCheckbox(e, setSelectedLanguages, selectedLanguages)}
-              defaultChecked={selectedLanguages.includes(language._id)}
+              checked={selectedLanguages.includes(language._id)}
             />
             {language.language}
           </label>
@@ -132,7 +138,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
               name="dialects"
               value={dialect._id}
               onChange={e => handleCheckbox(e, setSelectedDialects, selectedDialects)}
-              defaultChecked={selectedDialects.includes(dialect._id)}
+              checked={selectedDialects.includes(dialect._id)}
             />
             {dialect.dialect}
           </label>
