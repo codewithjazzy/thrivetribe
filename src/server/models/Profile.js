@@ -19,11 +19,9 @@ const profileSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: true,
   },
   bio: {
     type: String,
-    required: true,
   },
   journey: {
     type: String,
@@ -33,10 +31,9 @@ const profileSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
     validate: {
       validator: function(v) {
-        return validator.isEmail(v);
+        return !v || validator.isEmail(v);
       },
       message: props => `${props.value} is not a valid email address!`
     }
@@ -45,7 +42,7 @@ const profileSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: function(v) {
-        return validator.isMobilePhone(v, 'en-US');
+        return !v || validator.isMobilePhone(v, 'en-US');
       },
       message: props => `${props.value} is not a valid phone number!`
     }
@@ -54,7 +51,7 @@ const profileSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: function(v) {
-        return validator.isURL(v);
+        return !v || validator.isURL(v);
       },
       message: props => `${props.value} is not a valid URL!`
     }

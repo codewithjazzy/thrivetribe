@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
+import { API_URL } from '../config/api';
+
 
 export default function Providers(){
    const [allProfiles, setAllProfiles] = useState([])
@@ -7,8 +9,8 @@ export default function Providers(){
    useEffect(() => {
     const fetchProfiles = async () => {
         try {
-            const res = await fetch("http://localhost:3000/api/providers");
-            const data = await res.json();
+            const response = await fetch(`${API_URL}/api/providers`);
+            const data = await response.json();
             setAllProfiles(data.profiles);
         } catch (error) {
             console.error('error', error);

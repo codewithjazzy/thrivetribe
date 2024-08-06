@@ -33,6 +33,7 @@ export const postRegistration = async (req, res) => {
     try {
         const result = await cloudinary.uploader.upload(req.file.path);
 
+
         const newProfile = await Profile.create({
             image: result.secure_url,
             cloudinaryId: result.public_id,
@@ -45,17 +46,23 @@ export const postRegistration = async (req, res) => {
             email: req.body.email,
             phone: req.body.phone,
             website: req.body.website,
-            expertise: req.body.expertise,
-            treatments: req.body.treatments,
-            languages: req.body.languages,
-            dialects: req.body.dialects,
+            expertise: Array.from(new Set(req.body.expertise || [])),
+            treatments: Array.from(new Set(req.body.treatments || [])),
+            languages: Array.from(new Set(req.body.languages || [])),
+            dialects: Array.from(new Set(req.body.dialects || [])),
             location: req.body.location,
             user: req.user.id,
         });
 
-        res.status(201).json({ message: "Profile created successfully", profile: newProfile })
+        const updateProfileCompletion = await User.findOneAndUpdate(
+            { _id: req.user.id },
+            { $set: { needsProfileCompletion: false} },
+            { new: true }
+        );
+
+        res.status(201).json({ message: "Profile created successfully", profile: newProfile, user: updateProfileCompletion });
     } catch (error) {
         console.error("Error creating profile", error);
-        res.status(500).json({ message: "An error occured while creating profile" })
+        res.status(500).json({ message: "An error occurred while creating profile" })
     }
 }

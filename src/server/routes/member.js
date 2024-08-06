@@ -2,17 +2,17 @@ import { Router } from "express";
 import { ensureAuth } from "../middleware/auth.js"
 import upload from "../middleware/multer.js";
 import { getRegistration, postRegistration } from "../controllers/registration.js";
-import { memberProfile, editProfile } from "../controllers/user.js";
+import { getAccount, editAccount } from "../controllers/user.js";
 
 
 const router = Router();
 
 
 //Member Profile Routes
-router.get("/register", getRegistration);
-router.post("/register", upload.single("file"), postRegistration);
-router.get("/profile", ensureAuth, memberProfile);
-router.put("/editProfile", ensureAuth, editProfile)
+router.get("/createAccount", getRegistration);
+router.post("/createAccount", upload.single("file"), postRegistration);
+router.get("/account", ensureAuth, getAccount);
+router.put("/editAccount", upload.single("file"), editAccount)
 
 
 export default router;
