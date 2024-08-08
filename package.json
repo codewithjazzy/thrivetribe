@@ -9,6 +9,12 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@mantine/core": "^7.12.0",
+    "@mantine/dropzone": "^7.12.0",
+    "@mantine/form": "^7.12.0",
+    "@mantine/hooks": "^7.12.0",
+    "@mantine/notifications": "^7.12.0",
+    "@mantine/nprogress": "^7.12.0",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.2.0",
     "connect-mongo": "^5.1.0",
@@ -35,6 +41,9 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^4.2.0",
     "nodemon": "^3.0.1",
+    "postcss": "^8.4.41",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
     "vite": "^5.0.2"
   }
 }
