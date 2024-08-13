@@ -1,10 +1,13 @@
-
+import {
+    Box,
+    Heading
+} from "@chakra-ui/react"
 
 export default function About(){
     return (
-        <main>
+        <Box as="main">
             <section className="">
-                <h1>Welcome to ThriveTribe!</h1>
+                <Heading as="h1">Welcome to ThriveTribe!</Heading>
                 <p>
                 At ThriveTribe, we believe that mental wellness is a journey, not a destination. We are dedicated to creating a supportive community that empowers Black women, immigrants, and the children of immigrants to embrace their mental health with courage, understanding, and grace. Our mission is to connect you with therapists who not only share your racial identity but also understand the nuances of your cultural heritage, ensuring a therapy experience that truly resonates with your individual story.
                 </p>
@@ -41,6 +44,6 @@ export default function About(){
             <section className="">
                 <span>Welcome to the tribe. Welcome to ThriveTribe.</span>
             </section>          
-        </main>
+        </Box>
     )
 }
