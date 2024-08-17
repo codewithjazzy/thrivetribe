@@ -1,4 +1,12 @@
-
+import {
+    Box,
+    Button,
+    Container,
+    Flex,
+    Heading,
+    Stack,
+    Text,
+ } from "@chakra-ui/react"
 
 export default function Starter(){
     return (
