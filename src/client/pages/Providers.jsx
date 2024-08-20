@@ -1,3 +1,12 @@
+import {
+    Box,
+    Button,
+    Container,
+    Flex,
+    Heading,
+    Stack,
+    Text,
+ } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import { API_URL } from '../config/api';
