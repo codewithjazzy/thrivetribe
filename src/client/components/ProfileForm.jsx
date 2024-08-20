@@ -50,7 +50,6 @@ export default function ProfileForm({ initialData = {}, formFields = {}, onSubmi
      selectedTreatments.forEach(id => formData.append('treatments', id));
      selectedLanguages.forEach(id => formData.append('languages', id));
      selectedDialects.forEach(id => formData.append('dialects', id));
-     formData.append('location', selectedLocation);
 
 
     await onSubmit(formData, {
