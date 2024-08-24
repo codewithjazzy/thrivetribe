@@ -21,7 +21,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
     const navigate = useNavigate();
     const location = useLocation();
     const mobileNav = useDisclosure();
-    const bg = useColorModeValue("white", "gray.800");
+    const bg = useColorModeValue("white", "yellow.800");
   
     const handleLogout = async () => {
       await fetch("/logout");
@@ -51,7 +51,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
               display="flex"
               alignItems="center"
             >
-                <HeaderLogo />
+              <HeaderLogo />
               <VisuallyHidden>ThriveTribe</VisuallyHidden>
                 <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
                 ThriveTribe
@@ -62,7 +62,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
             <HStack
               spacing={1}
               mr={1}
-              color="brand.500"
+              color="black"
               display={{
                 base: "none",
                 md: "inline-flex",

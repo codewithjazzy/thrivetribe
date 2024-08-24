@@ -19,16 +19,15 @@ export default function Home(){
             bgSize="cover"
         >
             <Flex
-            align="center"
-            pos="relative"
+            align="center"        
             justify="center"
             boxSize="full"
             bg="blackAlpha.700"
             >
-            <Stack textAlign="center" alignItems="center" spacing={6}>
+            <Stack textAlign="center" alignItems="center" spacing={8}>
                 <Box>
                     <Heading as="h1"
-                        fontSize={""}
+                        size="3xl"
                         fontWeight="semibold"
                         color="white"
                         textTransform="uppercase"
@@ -37,30 +36,34 @@ export default function Home(){
                     </Heading>
                     <Heading as="h3"
                         color="white"
+                        size="xl"
+                        fontWeight="semibold"
                     >
                         Your Path to Culturally Attuned Therapy
                     </Heading>
                 </Box>
                 <Container color="white">
-                    <Text>
+                    <Text fontSize='lg' >
                         ThriveTribe is your compass in the quest for mental wellness, specially designed for Black women, including immigrants and children of immigrants. Here, you'll find a community that values your unique journey, connecting you with therapists who not only understand your cultural background but also speak your language, literally and metaphorically. Begin with our personalized quiz, tailored to guide you to therapy options that resonate with your story.
                     </Text>
-                    <Text>
+                    <Text fontSize='lg'>
                         At ThriveTribe, your cultural identity is not just acknowledged—it's celebrated as a cornerstone of your healing journey.
                     </Text>
                 </Container>
+                <Stack direction={['column', 'row']}>
                 <Button
                     textTransform="uppercase"
-                    w="fit-content"
-                >
-                Take The Quiz
+                    w={28}
+                    >
+                Take Quiz
                 </Button>
                 <Button
                     textTransform="uppercase"
-                    w="fit-content"
-                >
-                Learn More
+                    w={28}
+                    >
+                About Us
                 </Button>
+                    </Stack>
             </Stack>
             </Flex>
         </Box>
