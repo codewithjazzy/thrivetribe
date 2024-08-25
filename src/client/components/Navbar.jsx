@@ -39,7 +39,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
           base: 2,
           sm: 4,
         }}
-        py={4}
+        py={3}
         shadow="md"
       >
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
@@ -65,7 +65,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
               color="black"
               display={{
                 base: "none",
-                md: "inline-flex",
+                xl: "inline-flex",
               }}
             >
               <Link to="/about">
@@ -98,13 +98,13 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
             <Box
               display={{
                 base: "inline-flex",
-                md: "none",
+                xl: "none",
               }}
             >
               <IconButton
                 display={{
                   base: "flex",
-                  md: "none",
+                  xl: "none",
                 }}
                 aria-label="Open menu"
                 fontSize="20px"

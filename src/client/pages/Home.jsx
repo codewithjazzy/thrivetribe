@@ -14,7 +14,7 @@ export default function Home(){
         <Box
             w="full"
             h="100vh"
-            bgImage="url('/src/client/assets/ttHero.png')"
+            bgImage="url('/src/client/assets/homeLogo.png')"
             bgPosition="center"
             bgSize="cover"
         >
@@ -32,7 +32,7 @@ export default function Home(){
                         color="white"
                         textTransform="uppercase"
                     >
-                        Welcome to ThriveTribe
+                        ThriveTribe
                     </Heading>
                     <Heading as="h3"
                         color="white"

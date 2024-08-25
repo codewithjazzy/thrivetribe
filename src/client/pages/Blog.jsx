@@ -13,7 +13,7 @@ export default function Blog(){
 
             <VStack spacing={12}>
             <Stack textAlign="center" align="center" spacing={6}  >
-                    <Heading as="h1" size="3xl">Check out the latest blog posts</Heading>
+                    <Heading as="h1" size="2xl">Check out the latest blog posts</Heading>
                     <Heading as="h3" size="md">Our blog is a space for sharing stories, insights, and resources that resonate with the experiences of Black women.</Heading>
                     <Divider width="50%" borderWidth={2} mb={12} />
             </Stack>

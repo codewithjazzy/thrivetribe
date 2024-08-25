@@ -19,6 +19,11 @@ export default function Starter(){
             </section>
 
             <section className="">
+                <h2 className="">Finding the Right Therapist: Interviewing Your Therapist</h2>
+                <p className="">Finding a therapist who is the right fit for you is crucial for a successful therapeutic experience. It's okay to "interview" potential therapists by asking questions about their expertise, methods, and how they've helped others with similar issues. Pay attention to how you feel during these initial conversations; you should feel heard, respected, and comfortable. Remember, therapy is a collaborative process, and the therapeutic relationship plays a significant role in its effectiveness. Don't hesitate to meet with a few therapists before deciding who you feel most aligned with.</p>
+            </section>
+
+            <section className="">
                 <h2 className="">Preparing for Your First Therapy Session</h2>
                 <p className="">Your first therapy appointment or call is a foundational step towards your mental health journey. Preparation can help make this step as effective and comfortable as possible:</p>
                 <div className="">
@@ -36,11 +41,6 @@ export default function Starter(){
                         <li className="">✔️ Openness: While it can be challenging, try to be open and honest about your feelings and experiences. The more your therapist knows, the better they can help.</li>
                     </ul>
                 </div>
-            </section>
-
-            <section className="">
-                <h2 className="">Finding the Right Therapist: Interviewing Your Therapist</h2>
-                <p className="">Finding a therapist who is the right fit for you is crucial for a successful therapeutic experience. It's okay to "interview" potential therapists by asking questions about their expertise, methods, and how they've helped others with similar issues. Pay attention to how you feel during these initial conversations; you should feel heard, respected, and comfortable. Remember, therapy is a collaborative process, and the therapeutic relationship plays a significant role in its effectiveness. Don't hesitate to meet with a few therapists before deciding who you feel most aligned with.</p>
             </section>
         </main>
     )

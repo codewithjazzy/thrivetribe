@@ -14,7 +14,7 @@ export default function BlogCard({ title, content }){
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Card maxW='lg'>
+    <Card maxW='lg' variant='filled' borderWidth="2px">
       <CardHeader>
         <Heading size='md' textAlign="center">{title}</Heading>   
       </CardHeader>
