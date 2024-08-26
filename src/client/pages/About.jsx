@@ -3,12 +3,11 @@ import {
   Container,
   Stack,
   Text,
-  useColorModeValue,
   Image,
   Skeleton,
   Box,
-  Link,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 export default function About(){
     const Content = ({ children, ...props }) => {
@@ -34,11 +33,11 @@ export default function About(){
             <chakra.h1 fontSize="5xl" lineHeight={1} fontWeight="bold" textAlign="center">
                     Welcome to ThriveTribe
             </chakra.h1>
-            <Content textAlign="center">
+            <Content fontSize="lg" textAlign="center">
                     At ThriveTribe, we believe that mental wellness is a journey, not a destination. We are dedicated to creating a supportive community that empowers Black women, immigrants, and the children of immigrants to embrace their mental health with courage, understanding, and grace. Our mission is to connect you with therapists who not only share your racial identity but also understand the nuances of your cultural heritage, ensuring a therapy experience that truly resonates with your individual story.
             </Content>
         </Stack>
-        <Box mx={{ lg: 8 }} pos="relative">
+        <Box mx={{ lg: 8 }}>
           <Image
             boxShadow="lg"
             w="100%"
@@ -83,8 +82,8 @@ export default function About(){
                 </Content>
             </Box>
         </Stack>
-          <Link href="/portal" fontSize="sm" color="blue.400">
-            Provider? Add yourself to our Therapist Database →
+          <Link to="/portal">
+            <Text fontSize="sm" color="blue.400">Provider? Add yourself to our Therapist Database →</Text>
           </Link>
       </Stack>
     </Container>

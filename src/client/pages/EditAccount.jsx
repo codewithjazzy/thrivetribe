@@ -55,7 +55,11 @@ export default function EditAccount() {
     return (
         <main>
             <h2>Edit Your Profile</h2>
-            {initialData && <ProfileForm initialData={initialData} formFields={formFields} onSubmit={handleEditSubmit} />}
+            {initialData ? (
+                <ProfileForm initialData={initialData} formFields={formFields} onSubmit={handleEditSubmit} />
+            ) : (
+                <div>Loading...</div>
+            )}
         </main>
     );
 }

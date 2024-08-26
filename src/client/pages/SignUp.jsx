@@ -124,11 +124,10 @@ export default function SignUp(){
                     </Stack>
                     <Button 
                         type="submit"
-                        bg={'blue.400'}
-                        color={'white'}
-                        _hover={{
-                            bg: 'blue.500',
-                        }}
+                        variant="outline"
+                        border= "2px"
+                        borderColor="#f3af59"
+                        _hover={{ background: '#fff3dd' }}
                     >
                         Sign in
                     </Button>

@@ -7,6 +7,7 @@ import {
     Stack,
     Text,
  } from "@chakra-ui/react"
+ import { Link } from "react-router-dom"
 
 
 export default function Home(){
@@ -51,18 +52,28 @@ export default function Home(){
                     </Text>
                 </Container>
                 <Stack direction={['column', 'row']}>
-                <Button
-                    textTransform="uppercase"
-                    w={28}
+                <Link to="/quiz">
+                    <Button
+                        border= "2px" 
+                        borderColor="#f3af59"  
+                        _hover={{ background: '#fff3dd' }}
+                        textTransform="uppercase"
+                        w={28}
                     >
-                Take Quiz
-                </Button>
-                <Button
-                    textTransform="uppercase"
-                    w={28}
+                        Take Quiz
+                    </Button>
+                </Link>
+                <Link to="/about">
+                    <Button
+                        border= "2px" 
+                        borderColor="#f3af59"  
+                        _hover={{ background: '#fff3dd' }}
+                        textTransform="uppercase"
+                        w={28}
                     >
-                About Us
-                </Button>
+                        About Us
+                    </Button>
+                </Link>
                     </Stack>
             </Stack>
             </Flex>

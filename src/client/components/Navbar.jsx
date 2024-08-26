@@ -33,7 +33,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
   
     return (
       <chakra.header
-        bg={bg}
         w="full"
         px={{
           base: 2,
@@ -69,28 +68,37 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
               }}
             >
               <Link to="/about">
-                <Button variant="ghost">About</Button>
+                <Button variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>About</Button>
               </Link>
               <Link to="/therapy101">
-                <Button variant="ghost">Therapy 101</Button>
+                <Button variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>Therapy 101</Button>
               </Link>
               <Link to="/types">
-                <Button variant="ghost">Types of Therapy</Button>
+                <Button variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>Types of Therapy</Button>
               </Link>
               <Link to="/quiz">
-                <Button variant="ghost">Take The Quiz</Button>
+                <Button variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>Take The Quiz</Button>
               </Link>
               <Link to="/providers">
-                <Button variant="ghost">Find A Therapist</Button>
+                <Button variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>Find A Therapist</Button>
               </Link>
               <Link to="/blog">
-                <Button variant="ghost">Blog</Button>
+                <Button variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>Blog</Button>
               </Link>
               <Link to="/portal">
-                <Button variant="ghost">Therapist Portal</Button>
+                <Button variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>Therapist Portal</Button>
               </Link>
               {showLogout && (
-                <Button variant="ghost" onClick={handleLogout}>
+                <Button 
+                  variant="ghost"
+                  _hover={{ 
+                    background: '#fff3dd',
+                    border: '1px',
+                    borderColor: '#f3af59',
+                    outline: '#f3af59'
+                  }}
+                  onClick={handleLogout}
+                >
                   Logout
                 </Button>
               )}
@@ -108,11 +116,14 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
                 }}
                 aria-label="Open menu"
                 fontSize="20px"
-                color="gray.800"
                 _dark={{
                   color: "inherit",
                 }}
                 variant="ghost"
+                _hover={{ 
+                  background: '#fff3dd', 
+                  borderColor: '#f3af59',
+                }}
                 icon={<AiOutlineMenu />}
                 onClick={mobileNav.onOpen}
               />
@@ -134,46 +145,50 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
               >
                 <CloseButton
                   aria-label="Close menu"
+                  _hover={{
+                    background: '#fff3dd',
+                    borderColor: '#f3af59'
+                  }}
                   onClick={mobileNav.onClose}
                 />
   
                 <Link to="/about">
-                  <Button w="full" variant="ghost">
+                  <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     About
                   </Button>
                 </Link>
                 <Link to="/therapy101">
-                  <Button w="full" variant="ghost">
+                  <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Therapy 101
                   </Button>
                 </Link>
                 <Link to="/types">
-                  <Button w="full" variant="ghost">
+                  <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Types of Therapy
                   </Button>
                 </Link>
                 <Link to="/quiz">
-                  <Button w="full" variant="ghost">
+                  <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Take The Quiz
                   </Button>
                 </Link>
                 <Link to="/providers">
-                  <Button w="full" variant="ghost">
+                  <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Find A Therapist
                   </Button>
                 </Link>
                 <Link to="/blog">
-                  <Button w="full" variant="ghost">
+                  <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Blog
                   </Button>
                 </Link>
                 <Link to="/portal">
-                  <Button w="full" variant="ghost">
+                  <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Therapist Portal
                   </Button>
                 </Link>
                 {showLogout && (
-                  <Button w="full" variant="ghost" onClick={handleLogout}>
+                  <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }} onClick={handleLogout}>
                     Logout
                   </Button>
                 )}

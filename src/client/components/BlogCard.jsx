@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    Box,
     Card,
     CardBody,
     CardFooter,
@@ -14,14 +15,14 @@ export default function BlogCard({ title, content }){
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Card maxW='lg' variant='filled' borderWidth="2px">
+    <Card maxW='lg' variant='elevated'>
       <CardHeader>
         <Heading size='md' textAlign="center">{title}</Heading>   
       </CardHeader>
       <CardBody>
-        <Text noOfLines={isExpanded ? null : 5}>
+        <Box noOfLines={isExpanded ? null : 5}>
             {content}
-        </Text>
+        </Box>
       </CardBody>
       <CardFooter justify="flex-end">
         <Text as="i" fontSize={16}>
