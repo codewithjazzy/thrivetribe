@@ -135,7 +135,7 @@ export default function ProfileForm({ initialData = {}, formFields = {}, onSubmi
           <FormLabel>Areas of Expertise</FormLabel>
           <CheckboxGroup value={selectedExpertise} onChange={handleCheckbox(setSelectedExpertise, selectedExpertise)}>
             <SimpleGrid columns={[2, null, 3, 4]} spacing={2}>
-              {formFields.expertise?.map(expert => (
+              {formFields.expertise.map(expert => (
                 <Checkbox key={expert._id} value={expert._id} colorScheme="yellow" size="sm" isChecked={selectedExpertise.includes(expert._id)}>
                   {expert.expertise}
                 </Checkbox>
@@ -186,16 +186,19 @@ export default function ProfileForm({ initialData = {}, formFields = {}, onSubmi
           </CheckboxGroup>
         </Box>
 
-        <Button
-          type="submit"
-          variant="outline"
-          border="2px"
-          borderColor="#f3af59"
-          _hover={{ background: '#fff3dd' }}
-          size="sm"
-        >
-          Save Profile
-        </Button>
+        <Box width="auto" alignSelf="flex-end">
+          <Button
+            type="submit"
+            variant="outline"
+            border="2px"
+            borderColor="#f3af59"
+            _hover={{ background: '#fff3dd' }}
+            size="lg"
+            isDisabled
+          >
+            Save Profile
+          </Button>
+        </Box>
       </VStack>
     </Box>
   );

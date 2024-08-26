@@ -1,3 +1,19 @@
+import {
+    Box,
+    Container,
+    Divider,
+    Flex,
+    Heading,
+    Image,
+    Text,
+    VStack,
+    Link,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+  } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom"
 
 
@@ -6,56 +22,141 @@ export default function Profile() {
     const therapist = state.therapist
 
     return (
-        <main>
-            <section>
-                <img
-                    src={therapist.image.replace('/upload/', '/upload/w_200,h_200,c_fill/')}
-                />
-                <h2>{therapist.firstName} {therapist.lastName}, {therapist.title}</h2>
-                <span>{therapist.location.state}</span>
-            </section>
-            <section>
-                <h4>Contact</h4>
-                <span>Phone: {therapist.phone}</span>
-                <span>Email: {therapist.email}</span>
-                <span>Website: {therapist.website}</span>
-            </section>
-            <section>
-                <h3>Professional Bio</h3>
-                <p>{therapist.bio}</p>
-            </section>
-            <section>
-                <h3>Personal Journey</h3>
-                <p>{therapist.journey}</p>
-            </section>
-            <section>
-                <h3>Cultural Heritage</h3>
-                <p>{therapist.heritage}</p>
-            </section>
-            <section>
-                <h3>Specialties and Expertise</h3>
-                {therapist.expertise.map(skill => (
+        <Container maxW="5xl" p={{ base: 5, md: 10 }} my={8}>
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        align={{ base: "center", md: "flex-start" }}
+        mb={8}
+      >
+        {/* Profile Image */}
+        <Box mr={{ md: 8 }}>
+          <Image
+            borderRadius="full"
+            boxSize="250px"
+            src={therapist.image.replace('/upload/', '/upload/w_200,h_200,c_fill/')}
+            alt={`${therapist.firstName} ${therapist.lastName}`}
+          />
+        </Box>
+
+        {/* Basic Information */}
+        <VStack align={{ base: "center", md: "start" }} ml={{ md: 24 }} mt={{ base: 4, md: 12 }} spacing={4}>
+          <Heading fontSize="2xl">
+            {therapist.firstName} {therapist.lastName}, {therapist.title}
+          </Heading>
+          <Text color="gray.500">{therapist.location.state}</Text>
+          <VStack align="start" spacing={1} ml={{ base: 0, md: 0 }}>
+            {therapist.phone && <Text>Phone: {therapist.phone}</Text>}
+            {therapist.email && (
+              <Text>
+                Email: <Link href={`mailto:${therapist.email}`} color="blue.500">{therapist.email}</Link>
+              </Text>
+            )}
+            {therapist.website && (
+              <Text>
+                Website: <Link href={therapist.website} isExternal color="blue.500">{therapist.website}</Link>
+              </Text>
+            )}
+          </VStack>
+        </VStack>
+      </Flex>
+
+      {/* Yellow Divider */}
+      <Divider borderColor="#f7c687" mb={8} />
+
+      {/* Bio and Additional Information */}
+      <Box>
+        <Heading fontSize="xl" mb={4}>Professional Bio</Heading>
+        <Text mb={8}>{therapist.bio}</Text>
+
+        <Heading fontSize="xl" mb={4}>Personal Journey</Heading>
+        <Text mb={8}>{therapist.journey}</Text>
+
+        <Heading fontSize="xl" mb={4}>Cultural Heritage</Heading>
+        <Text mb={8}>{therapist.heritage}</Text>
+
+        {/* Accordion Sections for Arrays */}
+        <Accordion allowToggle>
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                Specialties and Expertise
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              {therapist.expertise.length ? (
+                <ul>
+                  {therapist.expertise.map(skill => (
                     <li key={skill._id}>{skill.expertise}</li>
-                ))}
-            </section>
-            <section>
-                <h3>Treatment Approaches</h3>
-                {therapist.treatments.map(treat => (
+                  ))}
+                </ul>
+              ) : (
+                <Text>No expertise listed.</Text>
+              )}
+            </AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                Treatment Approaches
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              {therapist.treatments.length ? (
+                <ul>
+                  {therapist.treatments.map(treat => (
                     <li key={treat._id}>{treat.treatment}</li>
-                ))}
-            </section>
-            <section>
-                <h3>Spoken Languages</h3>
-                {therapist.languages.map(language => (
+                  ))}
+                </ul>
+              ) : (
+                <Text>No treatments listed.</Text>
+              )}
+            </AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                Spoken Languages
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              {therapist.languages.length ? (
+                <ul>
+                  {therapist.languages.map(language => (
                     <li key={language._id}>{language.language}</li>
-                ))}
-            </section>
-            <section>
-                <h3>Spoken Dialects</h3>
-                {therapist.dialects.map(dialect => (
+                  ))}
+                </ul>
+              ) : (
+                <Text>No languages listed.</Text>
+              )}
+            </AccordionPanel>
+          </AccordionItem>
+
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                Spoken Dialects
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              {therapist.dialects.length ? (
+                <ul>
+                  {therapist.dialects.map(dialect => (
                     <li key={dialect._id}>{dialect.dialect}</li>
-                ))}
-            </section>
-        </main>
+                  ))}
+                </ul>
+              ) : (
+                <Text>No dialects listed.</Text>
+              )}
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      </Box>
+    </Container>
     )
 }
