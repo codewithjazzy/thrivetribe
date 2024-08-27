@@ -45,7 +45,7 @@ export default function About(){
             minW={{ base: 'auto', md: '30rem' }}
             maxH="20rem"
             objectFit="cover"
-            src={`/src/client/assets/ttHero.png`}
+            src={`/assets/ttHero.png`}
             rounded="md"
             fallback={<Skeleton />}
           />

@@ -15,7 +15,7 @@ export default function Home() {
         <Box
             w="full"
             minH="100vh"
-            bgImage="url('/src/client/assets/homeLogo.png')"
+            bgImage="url('/assets/homeLogo.png')"
             bgPosition="center"
             bgSize="cover"
             bgRepeat="no-repeat"
