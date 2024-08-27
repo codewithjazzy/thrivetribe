@@ -50,10 +50,12 @@ export default function ProfileForm({ initialData = {}, formFields = {}, onSubmi
     event.preventDefault();
     const formData = new FormData(event.target);
 
+    
     selectedExpertise.forEach(id => formData.append('expertise', id));
     selectedTreatments.forEach(id => formData.append('treatments', id));
     selectedLanguages.forEach(id => formData.append('languages', id));
     selectedDialects.forEach(id => formData.append('dialects', id));
+
 
     await onSubmit(formData, {
       selectedExpertise,
