@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import ProfileForm from '../components/ProfileForm';
 import { API_URL } from '../config/api';
+import {
+  Box, 
+  Container,
+  Heading,
+} from '@chakra-ui/react'
 
 
 export default function CreateAccount() {
@@ -38,10 +43,12 @@ export default function CreateAccount() {
   };
 
   return (
-    <main>
-      <h2>Create Your Profile</h2>
-      <ProfileForm formFields={formFields} onSubmit={handleRegistrationSubmit} />
-    </main>
+    <Container maxW="5xl" p={{ base: 5, md: 10 }} my={8}>
+      <Heading as="h1" size="2xl" mb={8} textAlign="center">Create Your Profile</Heading>
+      <Box borderWidth={1} borderRadius="lg" p={8} borderColor="#f3af59">
+        <ProfileForm formFields={formFields} onSubmit={handleRegistrationSubmit} />
+      </Box>
+    </Container>
   );
 };
 

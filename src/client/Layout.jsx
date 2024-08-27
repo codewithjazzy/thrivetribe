@@ -1,14 +1,16 @@
-import Navbar from "./components/Navbar"
-import { Outlet } from "react-router-dom"
-
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import { Outlet } from "react-router-dom";
+import { Flex } from "@chakra-ui/react";
 
 export default function Layout() {
     return (
-        <>
+        <Flex direction="column" minHeight="100vh">
             <Navbar />
-            <main>
+            <Flex as="main" flex="1" direction="column">
                 <Outlet />
-            </main>
-        </>
-    )
+            </Flex>
+            <Footer />
+        </Flex>
+    );
 }
