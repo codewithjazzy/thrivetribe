@@ -46,7 +46,7 @@ export default function Footer() {
         spacing={4}
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}>
-        <Text>© {currentYear} Jasmine Taylor. All rights reserved</Text>
+        <Text textAlign="center" fontSize={{ base: 'sm', md: 'md' }}>© {currentYear} Jasmine Taylor. All rights reserved</Text>
         <Stack direction={'row'} spacing={6}>
           <SocialButton label={'Github'} href={'https://github.com/codewithjazzy'}>
             <FaGithub />
