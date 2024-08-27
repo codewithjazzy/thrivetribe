@@ -1,4 +1,3 @@
-import "./App.css";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import CreateAccount from "./pages/CreateAccount";
