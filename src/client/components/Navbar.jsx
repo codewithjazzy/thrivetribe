@@ -26,10 +26,15 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
     const handleLogout = async () => {
       await fetch("/logout");
       navigate("/login");
+      mobileNav.onClose(); // Close the burger menu after logout
     };
   
     // Conditionally show logout button on these paths
     const showLogout = ["/account", "/createAccount", "/editAccount"].includes(location.pathname);
+
+    const handleNavItemClick = () => {
+      mobileNav.onClose(); // Close the burger menu after navigation item click
+    };
   
     return (
       <chakra.header
@@ -152,37 +157,37 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
                   onClick={mobileNav.onClose}
                 />
   
-                <Link to="/about">
+                <Link to="/about" onClick={handleNavItemClick}>
                   <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     About
                   </Button>
                 </Link>
-                <Link to="/therapy101">
+                <Link to="/therapy101" onClick={handleNavItemClick}>
                   <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Therapy 101
                   </Button>
                 </Link>
-                <Link to="/types">
+                <Link to="/types" onClick={handleNavItemClick}>
                   <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Types of Therapy
                   </Button>
                 </Link>
-                <Link to="/quiz">
+                <Link to="/quiz" onClick={handleNavItemClick}>
                   <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Take The Quiz
                   </Button>
                 </Link>
-                <Link to="/providers">
+                <Link to="/providers" onClick={handleNavItemClick}>
                   <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Find A Therapist
                   </Button>
                 </Link>
-                <Link to="/blog">
+                <Link to="/blog" onClick={handleNavItemClick}>
                   <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Blog
                   </Button>
                 </Link>
-                <Link to="/portal">
+                <Link to="/portal" onClick={handleNavItemClick}>
                   <Button w="full" variant="ghost" _hover={{ background: '#fff3dd', borderColor: '#f3af59' }}>
                     Therapist Portal
                   </Button>
